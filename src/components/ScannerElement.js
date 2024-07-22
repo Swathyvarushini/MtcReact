@@ -19,7 +19,7 @@ export default function ScannerElement() {
                         setQrCodeResult(result.data);
                         setScanning(false);
                         qrScanner.stop();
-                        navigate("/form");
+                        navigate(`/form?data=${encodeURIComponent(result.data)}`);
                     },
                     {
                         onDecodeError: error => console.warn(error),

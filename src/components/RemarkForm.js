@@ -9,22 +9,23 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setRemarks(value);
+    const { name, value } = e.target.value;
+    setRemarks({ ...remarks, [name]: value });
     setIsSubmitDisabled(value.length <= 50);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
+
     try {
-      const response = await axios.post(`${CONFIG.URL}/form/submit`, {
+      const response = await axios.post(`${CONFIG.URL}/admin/FormDetails`, {
         username,
         fleetNumber,
         remarks,
-        date
       }, {
         headers: {
-          'barrer': `${token}`,
+          'barrer ': `${token}`,
           'Content-Type': 'application/json'
         }
       });
