@@ -11,7 +11,6 @@ export default function Scanner() {
         <p className='scanner__desc'>Click the button, scan the QR code, to access the form.</p>
         <ScannerElement />
       </section>
-        
     </>
   )
 }

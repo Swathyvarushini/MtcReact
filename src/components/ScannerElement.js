@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import QrScanner from 'qr-scanner';
+import { useNavigate } from 'react-router-dom';
 
 export default function ScannerElement() {
     const videoRef = useRef(null);
@@ -7,6 +8,7 @@ export default function ScannerElement() {
     const [error, setError] = useState('');
     const [scanning, setScanning] = useState(false);
     let qrScanner;
+    const navigate = useNavigate();
 
     const startScanner = async () => {
         if (videoRef.current) {
@@ -17,6 +19,7 @@ export default function ScannerElement() {
                         setQrCodeResult(result.data);
                         setScanning(false);
                         qrScanner.stop();
+                        navigate("/form");
                     },
                     {
                         onDecodeError: error => console.warn(error),
