@@ -1,5 +1,5 @@
 const CONFIG = {
-    URL:"http://localhost:8080"
+    URL:"https://mtcinspection.onrender.com",
 };
 
 export default CONFIG;
