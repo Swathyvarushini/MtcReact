@@ -51,18 +51,19 @@ export default function Login() {
                 }
             });
 
-            console.log('Response:', response);
-
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                dispatch(setUser({ user: true })); 
-                navigate("/scanner");  
+                dispatch(setUser({ user: { username: formData.username } })); // Ensure the user data is set
+                if (response.data.role === 'admin') {
+                    navigate("/home");
+                } else {
+                    navigate("/scanner");
+                }
             } else {
                 setErrorMessage(response.data.message);
             }
         } catch (err) {
             console.error('Error:', err);
-            dispatch(setUser({ user: false}));
             setErrorMessage('An error occurred. Please try again.');
         }
     };
