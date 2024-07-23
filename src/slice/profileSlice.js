@@ -8,12 +8,10 @@ export const fetchProfileInfo = createAsyncThunk(
         try {
             const response = await axios.get(`${CONFIG.URL}/admins/viewStaff/${username}`, {
                 headers: {
-                    'barrer ' : `${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log("ResponseData",response.data);
             return response.data;
-            
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
         }
