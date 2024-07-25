@@ -14,10 +14,9 @@ export default function Form() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const data = params.get('data');
-    if (data) {
-      const decodedData = decodeURIComponent(data);
-      setFormData(JSON.parse(decodedData));
+    const fleetNumberParam = params.get('fleetNumber');
+    if (fleetNumberParam) {
+      setFleetNumber(decodeURIComponent(fleetNumberParam));
     }
 
     const token = localStorage.getItem('token');
@@ -25,10 +24,9 @@ export default function Form() {
     axios.get(`${CONFIG.URL}/user/profile`, {
       headers: {
         'barrer ': `${token}`,
-}
+      }
     }).then(response => {
       setUsername(response.data.username);
-      setFleetNumber(response.data.fleetNumber);
     }).catch(error => {
       console.error('Error fetching user data:', error);
     });
@@ -57,9 +55,9 @@ export default function Form() {
           <p className="form__datetime">{currentDate}</p>
         </div>
         <div className='form-body'>
-          <RemarkForm formData={formData} />
+          <RemarkForm formData={formData} fleetNumber={fleetNumber} />
         </div>
       </section>
     </>
-  )
+  );
 }
