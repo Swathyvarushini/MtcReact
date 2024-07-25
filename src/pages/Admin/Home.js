@@ -12,9 +12,6 @@ const Home = () => {
       dispatch(fetchProfileInfo(userInfo.user.username));
     }
   }, [dispatch, userInfo]);
-  console.log(profileInfo);
-  console.log(userInfo);
-
 
   const { staffNo, username, designation, branch, error } = profileInfo;
 

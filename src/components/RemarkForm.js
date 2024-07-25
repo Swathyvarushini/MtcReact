@@ -52,7 +52,7 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
       </form>
     </div>
-  )
+  );
 }
 
 export default RemarkForm;
