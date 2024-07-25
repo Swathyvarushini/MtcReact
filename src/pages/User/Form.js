@@ -4,6 +4,7 @@ import icon from '../../assets/images/newlogo.png';
 import axios from 'axios';
 import CONFIG from '../../Config';
 import { useLocation } from 'react-router-dom';
+import FormData from '../../components/FormData';
 
 export default function Form() {
   const location = useLocation();
@@ -55,7 +56,7 @@ export default function Form() {
           <p className="form__datetime">{currentDate}</p>
         </div>
         <div className='form-body'>
-          <RemarkForm formData={formData} fleetNumber={fleetNumber} />
+          <FormData formData={formData} fleetNumber={fleetNumber} />
         </div>
       </section>
     </>

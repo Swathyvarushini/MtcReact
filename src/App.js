@@ -13,6 +13,7 @@ import VehicleDetails from "./pages/Admin/VehicleDetails";
 import InspectionDetails from "./pages/Admin/InspectionDetails";
 import UserRegister from "./pages/Admin/UserRegister";
 import VehicleRegister from "./pages/Admin/VehicleRegister";
+import FormData from "./components/FormData";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/scanner" element={<ProtectedRoute><Scanner /></ProtectedRoute>} />
+        <Route path="/formData" element={<ProtectedRoute><FormData /></ProtectedRoute>} />
         <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/user-details" element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
