@@ -62,6 +62,7 @@ const UserDetails = () => {
                             <th>Mobile Number</th>
                             <th>Email ID</th>
                             <th>Role</th>
+                            <th>Branch</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -69,12 +70,13 @@ const UserDetails = () => {
                         {filteredStaffDetails.map((staff, index) => (
                             <tr key={staff.staffNumberPojo}>
                                 <td>{index + 1}</td>
-                                <td>{staff.staffNumberPojo}</td>
+                                <td>{staff.username || 'N/A'}</td>
                                 <td>{staff.staffNamePojo}</td>
                                 <td>{staff.staffDesignationPojo}</td>
                                 <td>{staff.staffMobileNumberPojo || 'N/A'}</td>
                                 <td>{staff.staffMailIdPojo || 'N/A'}</td>
                                 <td>{staff.staffRolePojo}</td>
+                                <td>{staff.staffBranchPojo || 'N/A'}</td>
                                 <td>
                                     <button className="btn update-btn">Update</button>
                                     <button className="btn delete-btn">Delete</button>

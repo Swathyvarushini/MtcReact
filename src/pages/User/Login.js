@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import busImage from '../../assets/images/bus.jpg';
-import icon from '../../assets/images/newlogo.png';
-import axios from "axios";
+import axios from 'axios';
 import CONFIG from '../../Config';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slice/userSlice';
+import busImage from '../../assets/images/bus.jpg';
+import icon from '../../assets/images/newlogo.png';
 
 export default function Login() {
     const [formData, setFormData] = useState({ username: '', password: '' });
@@ -53,7 +53,8 @@ export default function Login() {
 
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                dispatch(setUser({ user: { username: formData.username } })); // Ensure the user data is set
+                dispatch(setUser(response.data)); 
+                console.log('setUser dispatched with:', response.data);
                 if (response.data.role === 'admin') {
                     navigate("/home");
                 } else {

@@ -4,15 +4,18 @@ import CONFIG from '../Config';
 
 export const fetchProfileInfo = createAsyncThunk(
     'profile/fetchProfileInfo',
-    async (username, thunkAPI) => {
+    async (staffNumber, thunkAPI) => {
         try {
-            const response = await axios.get(`${CONFIG.URL}/admins/viewStaff/${username}`, {
+            const response = await axios.get(`${CONFIG.URL}/admins/viewStaff`, {
+                params: { staffNumber}, 
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'barrer ': `${localStorage.getItem('token')}`,
                 },
             });
+            console.log('API Response:', response.data);
             return response.data;
         } catch (error) {
+            console.error('API Error:', error.response.data);
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
@@ -21,24 +24,24 @@ export const fetchProfileInfo = createAsyncThunk(
 const profileSlice = createSlice({
     name: 'profile',
     initialState: {
-        staffNo: '',
-        username: '',
-        designation: '',
-        branch: '',
+        staffNumber: '',
+        staffName: '',
+        role: '',
         error: null,
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchProfileInfo.fulfilled, (state, action) => {
-                state.staffNo = action.payload.staffNo;
-                state.username = action.payload.username;
-                state.designation = action.payload.designation;
-                state.branch = action.payload.branch;
+                const { staffNumber, staffName, role } = action.payload;
+                state.staffNumber = staffNumber || '';
+                state.staffName = staffName || '';
+                state.role = role || '';
                 state.error = null;
             })
             .addCase(fetchProfileInfo.rejected, (state, action) => {
-                state.error = action.payload;
+                console.log('Profile Info Rejected:', action.payload);
+                state.error = action.payload || 'Failed to fetch profile information.';
             });
     },
 });

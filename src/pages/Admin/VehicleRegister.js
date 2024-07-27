@@ -19,7 +19,7 @@ const VehicleRegister = () => {
               </div>
               <div class="input-group">
                   <label for="doc">Date of Commencement</label>
-                  <input type="text" id="doc" name="doc" placeholder="Date of Commencement" required />
+                  <input type="date" id="doc" name="doc" required />
               </div>
               <button type="submit" class="submit-btn">Submit</button>
           </form>

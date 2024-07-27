@@ -7,7 +7,8 @@ const userSlice = createSlice({
     },
     reducers: {
         setUser(state, action) {
-            state.userInfo = action.payload;
+            state.userInfo = action.payload; 
+            console.log('User info set in Redux state:', state.userInfo);
         },
         clearUser(state) {
             state.userInfo = null;
