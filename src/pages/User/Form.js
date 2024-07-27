@@ -31,7 +31,6 @@ export default function Form() {
           <div className="form__username">
             <p>{staffNumber}</p>
             <p>{staffName}</p>
-            <p>{userInfo?.fleetNumber}</p>
           </div>
           <p className="form__datetime">{currentDate}</p>
         </div>
