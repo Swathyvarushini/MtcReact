@@ -5,7 +5,7 @@ import logo from "../assets/images/newlogo.png";
 export const UserNavbar = () => {
   return (
     <>
-      <nav className='navbar-container'>
+      <nav>
       <div className='navbar'>
         <img src={logo} alt="mtc-logo" className='logo-image' />
         <div>
