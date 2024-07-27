@@ -29,14 +29,6 @@ const UserRegister = () => {
                   <label for="emailId">Email ID</label>
                   <input type="email" id="emailId" name="emailId" placeholder="Enter Email ID" required/>
               </div>
-              <div class="input-group">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" name="password" placeholder="Enter Password" required/>
-              </div>
-              <div class="input-group">
-                  <label for="confirmPassword">Confirm Password</label>
-                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Enter Confirm Password" required/>
-              </div>
               <button type="submit" class="submit-btn">Submit</button>
           </form>
       </div>
