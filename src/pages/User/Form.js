@@ -29,8 +29,8 @@ export default function Form() {
           <img src={icon} alt="icon" className='scanner__icon' />
           <h1 className='scanner__title'>MTC-THAMBARAM</h1>
           <div className="form__username">
-            <p>{staffNumber}</p>
-            <p>{staffName}</p>
+            <p>Staff.No: {staffNumber}</p>
+            <p>Name: {staffName}</p>
             <p>{userInfo?.fleetNumber}</p>
           </div>
           <p className="form__datetime">{currentDate}</p>
