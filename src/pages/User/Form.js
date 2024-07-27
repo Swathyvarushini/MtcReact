@@ -5,8 +5,10 @@ import axios from 'axios';
 import CONFIG from '../../Config';
 import { useSelector } from 'react-redux';
 import FormData from '../../components/FormData';
+import { useLocation } from 'react-router-dom';
 
 export default function Form() {
+  const location = useLocation();
   const [currentDate, setCurrentDate] = useState('');
   const userInfo = useSelector((state) => state.user.userInfo);
   const {staffNumber, staffName} = userInfo;
@@ -36,7 +38,7 @@ export default function Form() {
           <p className="form__datetime">{currentDate}</p>
         </div>
         <div className='form-body'>
-          <FormData fleetNumber={userInfo?.fleetNumber} />
+          <FormData formData={formData} fleetNumber={fleetNumber} />
         </div>
       </section>
     </>

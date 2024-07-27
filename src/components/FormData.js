@@ -9,7 +9,6 @@ const FormData = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const data = params.get('data');
-        console.log('Data',data);
 
         if (data) {
             try {
@@ -17,7 +16,6 @@ const FormData = () => {
                 const parsedData = JSON.parse(decodedData);
                 if (parsedData.fleetNo) {
                     setFleetNo(parsedData.fleetNo);
-                    console.log(fleetNo);
                 }
             } catch (error) {
                 console.error('Error decoding data:', error);
@@ -28,7 +26,7 @@ const FormData = () => {
     return (
         <div>
             <h1>Form for Fleet No: {fleetNo}</h1>
-            <RemarkForm fleetNumber={fleetNo}/>
+            <RemarkForm />
         </div>
     );
 };
