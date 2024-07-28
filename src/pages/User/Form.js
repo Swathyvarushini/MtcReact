@@ -44,7 +44,7 @@ export default function Form() {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [location]);
+  }, []);
 
   return (
     <>
