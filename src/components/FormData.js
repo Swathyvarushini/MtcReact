@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import RemarkForm from './RemarkForm';
 
-const FormPage = () => {
+const FormData = () => {
     const location = useLocation();
     const [fleetNo, setFleetNo] = useState('');
 
@@ -13,7 +13,9 @@ const FormPage = () => {
         if (data) {
             try {
                 const decodedData = decodeURIComponent(data);
+                console.log("DeCode",decodedData);
                 const parsedData = JSON.parse(decodedData);
+                console.log("Parse",parsedData);
                 if (parsedData.fleetNo) {
                     setFleetNo(parsedData.fleetNo);
                 }
@@ -23,6 +25,8 @@ const FormPage = () => {
         }
     }, [location]);
 
+    console.log("location",location);
+    console.log("fleet",fleetNo);
     return (
         <div>
             <h1>Form for Fleet No: {fleetNo}</h1>
@@ -31,4 +35,4 @@ const FormPage = () => {
     );
 };
 
-export default FormPage;
+export default FormData;
