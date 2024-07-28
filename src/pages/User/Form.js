@@ -46,6 +46,9 @@ export default function Form() {
     return () => clearInterval(intervalId);
   }, []);
 
+  console.log(fleetNumber);
+  console.log(fleetNumber.fleetNo);
+
   return (
     <>
       <section className='container-fluid form-container'>
@@ -57,6 +60,7 @@ export default function Form() {
             <p>{staffName}</p>
             <p>{userInfo?.fleetNo}</p>
             <p>Fleet.No:{fleetNumber}</p>
+            <p>Fleet.No:{fleetNumber.fleetNo}</p>
           </div>
           <p className="form__datetime">{currentDate}</p>
         </div>
