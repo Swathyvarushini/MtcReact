@@ -41,7 +41,7 @@ const UserDetails = () => {
     const filteredStaffDetails = staffDetails
         .filter(staff =>
             staff.staffNamePojo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            staff.staffNumberPojo.toLowerCase().includes(searchTerm.toLowerCase())
+            staff.username.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .filter(staff => filterCriteria === '' || staff.staffRolePojo === filterCriteria || staff.staffDesignationPojo === filterCriteria);
 
@@ -70,9 +70,9 @@ const UserDetails = () => {
                     </thead>
                     <tbody>
                         {filteredStaffDetails.map((staff, index) => (
-                            <tr key={staff.staffNumberPojo}>
+                            <tr key={staff.username}>
                                 <td>{index + 1}</td>
-                                <td>{staff.staffNumberPojo || 'N/A'}</td>
+                                <td>{staff.username || 'N/A'}</td>
                                 <td>{staff.staffNamePojo}</td>
                                 <td>{staff.staffDesignationPojo}</td>
                                 <td>{staff.staffMobileNumberPojo || 'N/A'}</td>

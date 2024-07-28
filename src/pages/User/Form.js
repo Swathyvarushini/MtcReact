@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import RemarkForm from '../../components/RemarkForm';
 import icon from '../../assets/images/newlogo.png';
 import axios from 'axios';
 import CONFIG from '../../Config';
@@ -15,7 +16,6 @@ export default function Form() {
   const [formData, setFormData] = useState({});
 
   const { staffNumber, staffName } = userInfo;
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const fleetNumberParam = params.get('fleetNumber');
@@ -27,7 +27,7 @@ export default function Form() {
 
     axios.get(`${CONFIG.URL}/user/profile`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'barrer ': `${token}`,
       }
     }).then(response => {
       setUsername(response.data.username);
@@ -46,6 +46,9 @@ export default function Form() {
     return () => clearInterval(intervalId);
   }, [location]);
 
+  console.log(fleetNumber);
+  console.log(fleetNumber.fleetNo);
+
   return (
     <>
       <section className='container-fluid form-container'>
@@ -55,12 +58,14 @@ export default function Form() {
           <div className="form__username">
             <p>{staffNumber}</p>
             <p>{staffName}</p>
-            <p>Fleet.No: {fleetNumber}</p>
+            <p>{userInfo?.fleetNo}</p>
+            <p>Fleet.No:{fleetNumber}</p>
+            <p>Fleet.No:{fleetNumber.fleetNo}</p>
           </div>
           <p className="form__datetime">{currentDate}</p>
         </div>
         <div className='form-body'>
-          <FormData formData={formData} fleetNumber={fleetNumber} />
+          <FormData formData={formData} fleetNumber={userInfo?.fleetNumber} />
         </div>
       </section>
     </>
