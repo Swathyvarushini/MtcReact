@@ -9,7 +9,7 @@ import FormData from '../../components/FormData';
 export default function Form() {
   const [currentDate, setCurrentDate] = useState('');
   const userInfo = useSelector((state) => state.user.userInfo);
-
+  console.log(userInfo);
   useEffect(() => {
     const now = new Date();
     setCurrentDate(now.toLocaleString());
