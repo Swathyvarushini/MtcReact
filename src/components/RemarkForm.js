@@ -11,7 +11,7 @@ const RemarkForm = ({ username, fleetNumber }) => {
   const handleInputChange = (e) => {
     const { value } = e.target;
     setRemarks(value);
-    setIsSubmitDisabled(value.length <= 4);
+    setIsSubmitDisabled(value.length <= 5);
   };
 
   const handleSubmit = async (e) => {
@@ -19,14 +19,14 @@ const RemarkForm = ({ username, fleetNumber }) => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(`${CONFIG.URL}/admins/FormDetails`, {
+      const response = await axios.post(`${CONFIG.URL}/admin/FormDetails`, {
         username,
         fleetNumber,
         remarks,
         date: new Date().toISOString()
       }, {
         headers: {
-          'Barrer ': `${token}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });

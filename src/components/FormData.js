@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import RemarkForm from './RemarkForm';
 
-const FormData = () => {
+const FormPage = () => {
     const location = useLocation();
     const [fleetNo, setFleetNo] = useState('');
 
@@ -26,9 +26,9 @@ const FormData = () => {
     return (
         <div>
             <h1>Form for Fleet No: {fleetNo}</h1>
-            <RemarkForm />
+            <RemarkForm/>
         </div>
     );
 };
 
-export default FormData;
+export default FormPage;
