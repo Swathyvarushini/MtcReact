@@ -13,9 +13,7 @@ const FormData = () => {
         if (data) {
             try {
                 const decodedData = decodeURIComponent(data);
-                console.log("DeCode",decodedData);
                 const parsedData = JSON.parse(decodedData);
-                console.log("Parse",parsedData);
                 if (parsedData.fleetNo) {
                     setFleetNo(parsedData.fleetNo);
                 }
@@ -25,12 +23,10 @@ const FormData = () => {
         }
     }, [location]);
 
-    console.log("location",location);
-    console.log("fleet",fleetNo);
     return (
         <div>
             <h1>Form for Fleet No: {fleetNo}</h1>
-            <RemarkForm/>
+            <RemarkForm />
         </div>
     );
 };
