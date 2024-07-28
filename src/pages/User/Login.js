@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CONFIG from '../../Config';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../slice/userSlice';
+import { fetchUserInfo } from '../../slice/userSlice';
 import busImage from '../../assets/images/bus.jpg';
 import icon from '../../assets/images/newlogo.png';
 
@@ -53,8 +53,8 @@ export default function Login() {
 
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                dispatch(setUser(response.data)); 
-                console.log('setUser dispatched with:', response.data);
+                dispatch(fetchUserInfo()); // Fetch user information after setting the token
+                console.log('fetchUserInfo dispatched');
                 if (response.data.role === 'admin') {
                     navigate("/home");
                 } else {

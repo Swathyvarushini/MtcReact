@@ -19,14 +19,16 @@ const UserDetails = () => {
                     },
                 });
                 console.log(response.data);
-                setStaffDetails(response.data);
+                setStaffDetails(response.data.reverse());
             } catch (error) {
-                setError(error.response.data.message || 'An error occurred'); // Display a user-friendly error message
+                setError(error.response.data.message || 'An error occurred'); 
             }
         };
 
         fetchStaffDetails();
     }, []);
+
+    console.log('staffDetails',staffDetails);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -70,7 +72,7 @@ const UserDetails = () => {
                         {filteredStaffDetails.map((staff, index) => (
                             <tr key={staff.staffNumberPojo}>
                                 <td>{index + 1}</td>
-                                <td>{staff.username || 'N/A'}</td>
+                                <td>{staff.staffNumberPojo || 'N/A'}</td>
                                 <td>{staff.staffNamePojo}</td>
                                 <td>{staff.staffDesignationPojo}</td>
                                 <td>{staff.staffMobileNumberPojo || 'N/A'}</td>

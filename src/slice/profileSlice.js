@@ -4,19 +4,18 @@ import CONFIG from '../Config';
 
 export const fetchProfileInfo = createAsyncThunk(
     'profile/fetchProfileInfo',
-    async (staffNumber, thunkAPI) => {
+    async (staffNumber, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`${CONFIG.URL}/admins/viewStaff`, {
-                params: { staffNumber}, 
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${CONFIG.URL}/profile/${staffNumber}`, {
                 headers: {
-                    'barrer ': `${localStorage.getItem('token')}`,
+                    'barrer ': `${token}`,
                 },
             });
-            console.log('API Response:', response.data);
+            console.log('fetchProfileInfo', response.data);
             return response.data;
         } catch (error) {
-            console.error('API Error:', error.response.data);
-            return thunkAPI.rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data);
         }
     }
 );
@@ -33,15 +32,13 @@ const profileSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchProfileInfo.fulfilled, (state, action) => {
-                const { staffNumber, staffName, role } = action.payload;
-                state.staffNumber = staffNumber || '';
-                state.staffName = staffName || '';
-                state.role = role || '';
+                state.staffNumber = action.payload.staffNumber;
+                state.staffName = action.payload.staffName;
+                state.role = action.payload.role;
                 state.error = null;
             })
             .addCase(fetchProfileInfo.rejected, (state, action) => {
-                console.log('Profile Info Rejected:', action.payload);
-                state.error = action.payload || 'Failed to fetch profile information.';
+                state.error = action.payload;
             });
     },
 });
