@@ -3,15 +3,15 @@ import axios from 'axios';
 import CONFIG from '../Config';
 import { useNavigate } from 'react-router-dom';
 
-const RemarkForm = ({ username, fleetNumber }) => {
+const RemarkForm = ({ username, fleetNumber, token, date }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const { value } = e.target;
-    setRemarks(value);
-    setIsSubmitDisabled(value.length <= 5);
+    const { name, value } = e.target.value;
+    setRemarks({ ...remarks, [name]: value });
+    setIsSubmitDisabled(value.length <= 50);
   };
 
   const handleSubmit = async (e) => {
@@ -23,14 +23,12 @@ const RemarkForm = ({ username, fleetNumber }) => {
         username,
         fleetNumber,
         remarks,
-        date: new Date().toISOString()
       }, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'barrer ': `${token}`,
           'Content-Type': 'application/json'
         }
       });
-
       if (response.data.success) {
         alert('Form submitted successfully');
         navigate("/scanner");
@@ -42,25 +40,17 @@ const RemarkForm = ({ username, fleetNumber }) => {
       alert('Error submitting form');
     }
   };
-
   return (
     <div className='container-fluid remark-container'>
       <h3 className='form-title'>Inspection Form</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
         <label htmlFor='remarks' className='form-label'>Remarks</label>
-        <textarea
-          name="remarks"
-          id="remark"
-          className='form-textarea'
-          placeholder='Enter your comments'
-          value={remarks}
-          onChange={handleInputChange}
-        />
-        <small className='info-text'>*required to be filled</small>
+        <textarea name="remarks" id="remark" className='form-textarea' placeholder='Enter your comments' value={remarks} onChange={handleInputChange}></textarea>
+        <small className='info-text'>*required to filled</small>
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
       </form>
     </div>
   );
-};
+}
 
 export default RemarkForm;
