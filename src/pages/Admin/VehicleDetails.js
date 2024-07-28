@@ -10,6 +10,11 @@ const VehicleDetails = () => {
     const [filterCriteria, setFilterCriteria] = useState('');
     const [error, setError] = useState(null);
 
+    const formatDate = (dateString) => {
+        const [year, month, day] = dateString.split('-');
+        return `${day}-${month}-${year}`;
+    };
+
     useEffect(() => {
         const fetchVehicleDetails = async () => {
             try {
@@ -19,7 +24,7 @@ const VehicleDetails = () => {
                     },
                 });
                 console.log("Vehicle data" ,response.data);
-                setVehicleDetails(response.data);
+                setVehicleDetails(response.data.reverse());
             } catch (error) {
                 setError(error.response?.data?.message || 'An error occurred');
             }
@@ -69,7 +74,7 @@ const VehicleDetails = () => {
                                 <td>{vehicle.vehicleFleetNumberPojo}</td>
                                 <td>{vehicle.vehicleServiceRoutePojo || 'N/A'}</td>
                                 <td>{vehicle.vehicleModalPojo || 'N/A'}</td>
-                                <td>{vehicle.vehicleDateOfCommencementPojo || 'N/A'}</td>
+                                <td>{formatDate(vehicle.vehicleDateOfCommencementPojo)|| 'N/A'}</td>
                                 <td>
                                     <button className="btn update-btn">Update</button>
                                     <button className="btn delete-btn">Delete</button>

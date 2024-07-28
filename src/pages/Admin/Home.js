@@ -7,6 +7,7 @@ const Home = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const profileInfo = useSelector((state) => state.profile);
   console.log(userInfo);
+
   useEffect(() => {
     console.log('useEffect triggered with userInfo:', userInfo);
     if (userInfo && userInfo.staffNumber) {
@@ -17,7 +18,7 @@ const Home = () => {
     }
   }, [dispatch, userInfo]);
 
-  const { staffNumber, staffName, role ,error } = userInfo;
+  const { staffNumber, staffName, role, error } = profileInfo;
 
   console.log('profileInfo:', profileInfo);
 
@@ -40,10 +41,6 @@ const Home = () => {
             <h5>Designation</h5>
             <p>{role}</p>
           </div>
-          {/* <div className='admin-row'>
-            <h5>Branch</h5>
-            <p>{branch}</p>
-          </div> */}
         </div>
       )}
     </div>
