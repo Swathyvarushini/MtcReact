@@ -6,7 +6,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
   const profileInfo = useSelector((state) => state.profile);
-
+  console.log(userInfo);
   useEffect(() => {
     console.log('useEffect triggered with userInfo:', userInfo);
     if (userInfo && userInfo.staffNumber) {
@@ -17,7 +17,7 @@ const Home = () => {
     }
   }, [dispatch, userInfo]);
 
-  const { staffNumber, staffName, role ,error } = profileInfo;
+  const { staffNumber, staffName, role ,error } = userInfo;
 
   console.log('profileInfo:', profileInfo);
 
