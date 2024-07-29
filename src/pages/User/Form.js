@@ -24,7 +24,7 @@ export default function Form() {
 
     axios.get(`${CONFIG.URL}/user/profile`, {
       headers: {
-        'barrer ': `${token}`,
+        'Authorization': `Bearer ${ token }`,
       }
     }).then(response => {
       setUsername(response.data.username);
