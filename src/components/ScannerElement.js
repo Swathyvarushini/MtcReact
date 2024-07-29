@@ -7,8 +7,8 @@ export default function ScannerElement() {
     const [qrCodeResult, setQrCodeResult] = useState('');
     const [error, setError] = useState('');
     const [scanning, setScanning] = useState(false);
-    let qrScanner;
     const navigate = useNavigate();
+    let qrScanner;
 
     const startScanner = async () => {
         if (videoRef.current) {
@@ -36,7 +36,7 @@ export default function ScannerElement() {
                     setError('No camera found.');
                 }
             } catch (e) {
-                setError(`Error accessing the camera: ${e.message}`);
+                setError(`Error accessing the camera: ${ e.message }`);
             }
         }
     };

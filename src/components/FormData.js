@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import RemarkForm from './RemarkForm';
 
-const FormData = () => {
+const FormData = ({ fleetNumber }) => {
     const location = useLocation();
     const [fleetNo, setFleetNo] = useState('');
 
@@ -27,7 +27,7 @@ const FormData = () => {
 
     return (
         <div>
-            <h1>Form for Fleet No: {fleetNo}</h1>
+            <h1>Form for Fleet No: {fleetNumber}</h1>
             <RemarkForm />
         </div>
     );
