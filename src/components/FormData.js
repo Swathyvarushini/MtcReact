@@ -9,11 +9,13 @@ const FormData = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const data = params.get('data');
-
+        console.log('Raw data from URL:', data);
         if (data) {
             try {
                 const decodedData = decodeURIComponent(data);
+                console.log('Decoded data:', decodedData);
                 const parsedData = JSON.parse(decodedData);
+                console.log('Parsed data:', parsedData);
                 if (parsedData.fleetNo) {
                     setFleetNo(parsedData.fleetNo);
                 }
