@@ -16,6 +16,7 @@ export default function Form() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const fleetNumberParam = params.get('fleetNumber');
+    console.log('Raw data from URL:', fleetNumberParam);
     if (fleetNumberParam) {
       setFleetNumber(decodeURIComponent(fleetNumberParam));
     }
