@@ -20,7 +20,7 @@ const VehicleDetails = () => {
             try {
                 const response = await axios.get(`${CONFIG.URL}/admins/viewVehicles`, {
                     headers: {
-                        'barrer ': `${localStorage.getItem('token')}`,
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
                 console.log("Vehicle data" ,response.data);
