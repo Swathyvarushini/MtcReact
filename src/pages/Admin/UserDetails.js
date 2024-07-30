@@ -184,9 +184,9 @@ const UserDetails = () => {
                         </thead>
                         <tbody>
                             {filteredStaffDetails.map((staff, index) => (
-                                <tr key={staff.username}>
+                                <tr key={staff.staffNumberPojo}>
                                     <td>{index + 1}</td>
-                                    <td>{staff.username || 'N/A'}</td>
+                                    <td>{staff.staffNumberPojo || 'N/A'}</td>
                                     <td>{staff.staffNamePojo}</td>
                                     <td>{staff.staffDesignationPojo}</td>
                                     <td>{staff.staffMobileNumberPojo || 'N/A'}</td>
