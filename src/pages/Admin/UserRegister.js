@@ -26,10 +26,10 @@ const UserRegister = () => {
             const response = await axios.post(`${CONFIG.URL}/admins/StaffReg`, {
                 staffNumberPojo: formData.staffNo,
                 staffNamePojo: formData.name,
-                designationPojo: formData.designation,
-                rolePojo: formData.role,
-                mobileNumberPojo: formData.mobileNumber,
-                emailIdPojo: formData.emailId,
+                staffDesignationPojo: formData.designation,
+                staffRolePojo: formData.role,
+                staffMobileNumberPojo: formData.mobileNumber,
+                staffMailIdPojo: formData.emailId,
             }, {
                 headers: {
                     'barrer ': `${localStorage.getItem('token')}`,
