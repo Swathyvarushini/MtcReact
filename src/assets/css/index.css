@@ -604,13 +604,14 @@ h2 {
 .search-input::placeholder {
   color: #888;
 }
+
 /* Filter */
 .filter-container {
   display: flex;
   align-items: center;
   background-color: var(--bg-white);
-    border: 2px solid var(--border-gray);
-    border-radius: 8px;
+  border: 2px solid var(--border-gray);
+  border-radius: 8px;
   padding: 0.5rem;
   width: 100%;
   max-width: 150px;
@@ -633,6 +634,100 @@ h2 {
   color: var(--text-gray);
   padding: 0.5rem;
   width: 100%;
+}
+
+/* Filter Block */
+.filter-block {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.search{
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+}
+.filter {
+  min-width: 200px;
+}
+
+/* Edit Form */
+.edit-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid var(--border-gray);
+  border-radius: 16px;
+}
+
+.edit-form h3 {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-actions button:first-child {
+  background-color: transparent;
+  border: 1px solid var(--btn-black);
+  color: var(--text-gray);
+}
+
+.form-actions button:last-child {
+  background-color: var(--btn-black);
+  color: white;
+}
+
+.form-actions button:first-child:hover {
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+
+.form-actions button:last-child:hover {
+  background-color: var(--btn-gray);
 }
 
 /* Media Queries for Responsive Design */
@@ -800,6 +895,26 @@ h2 {
     max-width: 100%;
     font-size: 0.9rem;
   }
+
+  .edit-form form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-block {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search,
+  .filter {
+    min-width: 100%;
+  }
+
 }
 
 @media (min-width: 769px) and (max-width: 1234px) {

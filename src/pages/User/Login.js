@@ -43,7 +43,7 @@ export default function Login() {
 
         try {
             const response = await axios.post(`${CONFIG.URL}/admin/login`, {
-                username: formData.username,
+                staffNumberPojo: formData.username,
                 password: formData.password
             }, {
                 headers: {

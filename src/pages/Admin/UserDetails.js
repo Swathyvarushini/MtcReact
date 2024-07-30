@@ -16,22 +16,22 @@ const UserDetails = () => {
     useEffect(() => {
         fetchStaffDetails();
     }, []);
-   
-        const fetchStaffDetails = async () => {
-            try {
-                const response = await axios.get(`${CONFIG.URL}/admins/viewStaff`, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    },
-                });
-                console.log(response.data);
-                setStaffDetails(response.data.reverse());
-            } catch (error) {
-                setError(error.response.data.message || 'An error occurred'); 
-            }
-        };
 
-    console.log('staffDetails',staffDetails);
+    const fetchStaffDetails = async () => {
+        try {
+            const response = await axios.get(`${CONFIG.URL}/admins/viewStaff`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            console.log(response.data);
+            setStaffDetails(response.data.reverse());
+        } catch (error) {
+            setError(error.response.data.message || 'An error occurred');
+        }
+    };
+
+    console.log('staffDetails', staffDetails);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -67,21 +67,21 @@ const UserDetails = () => {
         }
     };
 
-    const handleDelete = async (/*staff*/) => {
+    const handleDelete = async (staff) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
             try {
                 console.log("Delete Success");
-                // const response = await axios.post(`${CONFIG.URL}/delete/staffDetails`, staff, {
-                //     headers: {
-                //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                //     },
-                // });
-                // console.log(response.data);
-                // fetchStaffDetails();
+                const response = await axios.post(`${CONFIG.URL}/delete/staffDetails`, staff, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                console.log(response.data);
+                fetchStaffDetails();
             } catch (error) {
                 console.log("Delete Unsuccess");
-                // setError(error.response.data.message || 'An error occurred');
+                setError(error.response.data.message || 'An error occurred');
             }
         }
     };
@@ -95,7 +95,7 @@ const UserDetails = () => {
 
     return (
         <div className='user-container'>
-            <div className='filters'>
+            <div className='filter-block'>
                 <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
                 <Filter filterCriteria={filterCriteria} handleFilterChange={handleFilterChange} />
             </div>
@@ -105,7 +105,7 @@ const UserDetails = () => {
                 <div className='edit-form'>
                     <h3>Edit Staff Details</h3>
                     <form>
-                        <div>
+                        <div className="form-group">
                             <label>Name: </label>
                             <input
                                 type="text"
@@ -114,7 +114,7 @@ const UserDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label>Designation: </label>
                             <input
                                 type="text"
@@ -123,7 +123,7 @@ const UserDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label>Mobile Number: </label>
                             <input
                                 type="text"
@@ -132,7 +132,7 @@ const UserDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label>Email ID: </label>
                             <input
                                 type="email"
@@ -141,7 +141,7 @@ const UserDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label>Role: </label>
                             <input
                                 type="text"
@@ -150,7 +150,7 @@ const UserDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label>Branch: </label>
                             <input
                                 type="text"
@@ -159,10 +159,13 @@ const UserDetails = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <button type="button" onClick={handleUpdate}>Save</button>
-                        <button type="button" onClick={() => { setIsEditing(false); setCurrentStaff(null); }}>Cancel</button>
+                        <div className="form-actions">
+                            <button type="button" onClick={() => { setIsEditing(false); setCurrentStaff(null); }}>Cancel</button>
+                            <button type="button" onClick={handleUpdate}>Save</button>
+                        </div>
                     </form>
                 </div>
+
             ) : (
                 <div className="table-container">
                     <table className="responsive-table">
