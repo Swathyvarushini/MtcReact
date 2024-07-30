@@ -639,7 +639,7 @@ h2 {
 /* Filter Block */
 .filter-block {
   display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 20px;
     padding: 10px;
@@ -647,14 +647,14 @@ h2 {
     flex-wrap: wrap;
 }
 
-.search{
+.search,
+.filter{
     flex: 1;
     min-width: 200px;
-    display: flex;
-    justify-content: center;
+    margin: 0;
 }
 .filter {
-  min-width: 200px;
+  flex: 0 1 auto;
 }
 
 /* Edit Form */
