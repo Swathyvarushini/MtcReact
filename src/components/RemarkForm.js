@@ -25,7 +25,7 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
         remarks,
       }, {
         headers: {
-          'barrer ': `${token}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
