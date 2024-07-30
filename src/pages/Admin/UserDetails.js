@@ -31,7 +31,6 @@ const UserDetails = () => {
         }
     };
 
-    console.log('staffDetails', staffDetails);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
