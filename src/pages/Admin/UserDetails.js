@@ -9,13 +9,19 @@ const UserDetails = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCriteria, setFilterCriteria] = useState('');
     const [error, setError] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentStaff, setCurrentStaff] = useState(null);
+
 
     useEffect(() => {
+        fetchStaffDetails();
+    }, []);
+   
         const fetchStaffDetails = async () => {
             try {
                 const response = await axios.get(`${CONFIG.URL}/admins/viewStaff`, {
                     headers: {
-                        'barrer ': `${localStorage.getItem('token')}`,
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
                 console.log(response.data);
@@ -25,9 +31,6 @@ const UserDetails = () => {
             }
         };
 
-        fetchStaffDetails();
-    }, []);
-
     console.log('staffDetails',staffDetails);
 
     const handleSearchChange = (e) => {
@@ -36,6 +39,51 @@ const UserDetails = () => {
 
     const handleFilterChange = (e) => {
         setFilterCriteria(e.target.value);
+    };
+
+    const handleEditClick = (staff) => {
+        setIsEditing(true);
+        setCurrentStaff(staff);
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setCurrentStaff({ ...currentStaff, [name]: value });
+    };
+
+    const handleUpdate = async () => {
+        try {
+            const response = await axios.post(`${CONFIG.URL}/update/staffDetails`, currentStaff, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            console.log(response.data);
+            fetchStaffDetails();
+            setIsEditing(false);
+            setCurrentStaff(null);
+        } catch (error) {
+            setError(error.response.data.message || 'An error occurred');
+        }
+    };
+
+    const handleDelete = async (/*staff*/) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this record?');
+        if (confirmDelete) {
+            try {
+                console.log("Delete Success");
+                // const response = await axios.post(`${CONFIG.URL}/delete/staffDetails`, staff, {
+                //     headers: {
+                //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                //     },
+                // });
+                // console.log(response.data);
+                // fetchStaffDetails();
+            } catch (error) {
+                console.log("Delete Unsuccess");
+                // setError(error.response.data.message || 'An error occurred');
+            }
+        }
     };
 
     const filteredStaffDetails = staffDetails
@@ -53,41 +101,105 @@ const UserDetails = () => {
             </div>
             <h3 className='user-heading'>Staff Information</h3>
             {error && <div className='error'>{error}</div>}
-            <div className="table-container">
-                <table className="responsive-table">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Staff.No</th>
-                            <th>Name</th>
-                            <th>Designation</th>
-                            <th>Mobile Number</th>
-                            <th>Email ID</th>
-                            <th>Role</th>
-                            <th>Branch</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredStaffDetails.map((staff, index) => (
-                            <tr key={staff.username}>
-                                <td>{index + 1}</td>
-                                <td>{staff.username || 'N/A'}</td>
-                                <td>{staff.staffNamePojo}</td>
-                                <td>{staff.staffDesignationPojo}</td>
-                                <td>{staff.staffMobileNumberPojo || 'N/A'}</td>
-                                <td>{staff.staffMailIdPojo || 'N/A'}</td>
-                                <td>{staff.staffRolePojo}</td>
-                                <td>{staff.staffBranchPojo || 'N/A'}</td>
-                                <td>
-                                    <button className="btn update-btn">Update</button>
-                                    <button className="btn delete-btn">Delete</button>
-                                </td>
+            {isEditing && currentStaff ? (
+                <div className='edit-form'>
+                    <h3>Edit Staff Details</h3>
+                    <form>
+                        <div>
+                            <label>Name: </label>
+                            <input
+                                type="text"
+                                name="staffNamePojo"
+                                value={currentStaff.staffNamePojo}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Designation: </label>
+                            <input
+                                type="text"
+                                name="staffDesignationPojo"
+                                value={currentStaff.staffDesignationPojo}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Mobile Number: </label>
+                            <input
+                                type="text"
+                                name="staffMobileNumberPojo"
+                                value={currentStaff.staffMobileNumberPojo}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Email ID: </label>
+                            <input
+                                type="email"
+                                name="staffMailIdPojo"
+                                value={currentStaff.staffMailIdPojo}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Role: </label>
+                            <input
+                                type="text"
+                                name="staffRolePojo"
+                                value={currentStaff.staffRolePojo}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Branch: </label>
+                            <input
+                                type="text"
+                                name="staffBranchPojo"
+                                value={currentStaff.staffBranchPojo}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <button type="button" onClick={handleUpdate}>Save</button>
+                        <button type="button" onClick={() => { setIsEditing(false); setCurrentStaff(null); }}>Cancel</button>
+                    </form>
+                </div>
+            ) : (
+                <div className="table-container">
+                    <table className="responsive-table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Staff.No</th>
+                                <th>Name</th>
+                                <th>Designation</th>
+                                <th>Mobile Number</th>
+                                <th>Email ID</th>
+                                <th>Role</th>
+                                <th>Branch</th>
+                                <th>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {filteredStaffDetails.map((staff, index) => (
+                                <tr key={staff.username}>
+                                    <td>{index + 1}</td>
+                                    <td>{staff.username || 'N/A'}</td>
+                                    <td>{staff.staffNamePojo}</td>
+                                    <td>{staff.staffDesignationPojo}</td>
+                                    <td>{staff.staffMobileNumberPojo || 'N/A'}</td>
+                                    <td>{staff.staffMailIdPojo || 'N/A'}</td>
+                                    <td>{staff.staffRolePojo}</td>
+                                    <td>{staff.staffBranchPojo || 'N/A'}</td>
+                                    <td>
+                                        <button className="btn update-btn" onClick={() => handleEditClick(staff)}>Edit</button>
+                                        <button className="btn delete-btn" onClick={() => handleDelete(staff)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 };

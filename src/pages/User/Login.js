@@ -53,7 +53,7 @@ export default function Login() {
 
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                dispatch(fetchUserInfo()); // Fetch user information after setting the token
+                dispatch(fetchUserInfo()); 
                 console.log('fetchUserInfo dispatched');
                 if (response.data.role === 'admin') {
                     navigate("/home");
