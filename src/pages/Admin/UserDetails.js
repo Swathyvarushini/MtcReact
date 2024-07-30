@@ -67,21 +67,21 @@ const UserDetails = () => {
         }
     };
 
-    const handleDelete = async (/*staff*/) => {
+    const handleDelete = async (staff) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
             try {
                 console.log("Delete Success");
-                // const response = await axios.post(`${CONFIG.URL}/delete/staffDetails`, staff, {
-                //     headers: {
-                //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                //     },
-                // });
-                // console.log(response.data);
-                // fetchStaffDetails();
+                const response = await axios.post(`${CONFIG.URL}/delete/staffDetails`, staff, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                console.log(response.data);
+                fetchStaffDetails();
             } catch (error) {
                 console.log("Delete Unsuccess");
-                // setError(error.response.data.message || 'An error occurred');
+                setError(error.response.data.message || 'An error occurred');
             }
         }
     };
