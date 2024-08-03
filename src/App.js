@@ -14,6 +14,7 @@ import InspectionDetails from "./pages/Admin/InspectionDetails";
 import UserRegister from "./pages/Admin/UserRegister";
 import VehicleRegister from "./pages/Admin/VehicleRegister";
 import FormData from "./components/FormData";
+import SelectRole from './pages/Admin/SelectRole'; 
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const AppRoutes = () => {
         <Route path="/scanner" element={<ProtectedRoute><Scanner /></ProtectedRoute>} />
         <Route path="/formData" element={<ProtectedRoute><FormData /></ProtectedRoute>} />
         <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
+        <Route path="/select-role" element={<ProtectedRoute><SelectRole /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/user-details" element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
         <Route path="/vehicle-details" element={<ProtectedRoute><VehicleDetails /></ProtectedRoute>} />

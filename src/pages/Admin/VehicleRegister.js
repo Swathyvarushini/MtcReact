@@ -22,7 +22,7 @@ const VehicleRegister = () => {
         try {
             const response = await axios.post(`${CONFIG.URL}/admins/regVehicle`, vehicleData, {
                 headers: {
-                    'barrer ': `${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
                 },
             });

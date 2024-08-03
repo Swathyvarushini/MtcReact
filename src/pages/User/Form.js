@@ -10,22 +10,27 @@ export default function Form() {
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState('');
   const [username, setUsername] = useState('');
-  const [fleetNumber, setFleetNumber] = useState('');
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const fleetNumberParam = params.get('fleetNumber');
-    console.log('Raw data from URL:', fleetNumberParam);
-    if (fleetNumberParam) {
-      setFleetNumber(decodeURIComponent(fleetNumberParam));
+    const dataParam = params.get('data');
+    console.log('Raw data from URL:', dataParam);
+    if (dataParam) {
+      try {
+        const decodedData = decodeURIComponent(dataParam);
+        const parsedData = JSON.parse(decodedData);
+        setFormData(parsedData);
+      } catch (error) {
+        console.error('Error parsing data from URL:', error);
+      }
     }
 
     const token = localStorage.getItem('token');
 
     axios.get(`${CONFIG.URL}/user/profile`, {
       headers: {
-        'Authorization': `Bearer ${ token }`,
+        'Authorization': `Bearer ${token}`,
       }
     }).then(response => {
       setUsername(response.data.username);
@@ -52,12 +57,12 @@ export default function Form() {
           <h1 className='scanner__title'>MTC-THAMBARAM</h1>
           <div className="form__username">
             <p>{username}</p>
-            <p>{fleetNumber}</p>
+            <p>{formData.vehicleFleetNumberPojo}</p>
           </div>
           <p className="form__datetime">{currentDate}</p>
         </div>
         <div className='form-body'>
-          <FormData formData={formData} fleetNumber={fleetNumber} />
+          <FormData formData={formData} />
         </div>
       </section>
     </>

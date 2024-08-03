@@ -18,7 +18,7 @@ const Home = () => {
     }
   }, [dispatch, userInfo]);
 
-  const { staffNumber, staffName, role, error } = profileInfo;
+  const { staffNumber, staffName, designation, error } = profileInfo;
 
   console.log('profileInfo:', profileInfo);
 
@@ -39,7 +39,7 @@ const Home = () => {
           </div>
           <div className='admin-row'>
             <h5>Designation</h5>
-            <p>{role}</p>
+            <p>{designation}</p>
           </div>
         </div>
       )}
