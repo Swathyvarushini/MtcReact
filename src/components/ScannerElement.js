@@ -19,7 +19,7 @@ export default function ScannerElement() {
                         setQrCodeResult(result.data);
                         setScanning(false);
                         qrScanner.stop();
-                        navigate(`/form?fleetNumber=${encodeURIComponent(result.data)}`);
+                        navigate(`/form?data=${encodeURIComponent(result.data)}`);
                     },
                     {
                         onDecodeError: error => console.warn(error),
@@ -36,7 +36,7 @@ export default function ScannerElement() {
                     setError('No camera found.');
                 }
             } catch (e) {
-                setError(`Error accessing the camera: ${ e.message }`);
+                setError(`Error accessing the camera: ${e.message}`);
             }
         }
     };

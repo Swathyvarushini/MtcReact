@@ -9,7 +9,7 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setRemarks({ ...remarks, [name]: value });
     setIsSubmitDisabled(value.length <= 50);
   };

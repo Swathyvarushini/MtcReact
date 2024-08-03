@@ -52,16 +52,17 @@ export default function Login() {
             });
 
             if (response.data.token) {
+                console.log(response.data.token);
                 localStorage.setItem('token', response.data.token);
-                dispatch(fetchUserInfo()); 
+                await dispatch(fetchUserInfo(response.data)); // Passing the whole response data
                 console.log('fetchUserInfo dispatched');
                 if (response.data.role === 'admin') {
-                    navigate("/home");
+                    navigate("/select-role");
                 } else {
                     navigate("/scanner");
                 }
             } else {
-                setErrorMessage(response.data.message);
+                setErrorMessage(response.data.message || 'Login failed. Please try again.');
             }
         } catch (err) {
             console.error('Error:', err);

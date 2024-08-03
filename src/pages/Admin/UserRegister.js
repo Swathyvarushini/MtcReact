@@ -32,7 +32,7 @@ const UserRegister = () => {
                 staffMailIdPojo: formData.emailId,
             }, {
                 headers: {
-                    'barrer ': `${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 }
             });
@@ -55,9 +55,7 @@ const UserRegister = () => {
             }
         } catch (error) {
             setMessage('An error occurred. Please try again.');
-        }
-
-      
+        } 
     };
 
     return (

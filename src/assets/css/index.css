@@ -639,20 +639,21 @@ h2 {
 /* Filter Block */
 .filter-block {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  flex-wrap: wrap;
 }
 
 .search,
-.filter{
-    flex: 1;
-    min-width: 200px;
-    margin: 0;
+.filter {
+  flex: 1;
+  min-width: 200px;
+  margin: 0;
 }
+
 .filter {
   flex: 0 1 auto;
 }
@@ -730,6 +731,63 @@ h2 {
   background-color: var(--btn-gray);
 }
 
+/* SelectRole.css */
+.select-role-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--text-gray);
+  font-weight: 400;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-light-gray);
+  margin-bottom: 1.5rem;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  padding: 20px;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-gray);
+  background-color: transparent;
+  border: 2px solid var(--border-gray-dark);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.3s ease, border 0.3s ease, background 0.3s ease;
+}
+
+.button svg {
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  border: 2px solid var(--border-gray-dark);
+  background: var(--btn-gray);
+  color: var(--white);
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
@@ -801,6 +859,7 @@ h2 {
     text-align: center;
   }
 
+  /* User Navbar */
   .navbar-container {
     padding: 0.5rem;
   }
@@ -854,6 +913,8 @@ h2 {
     display: block;
   }
 
+  /* Admin Home page */
+
   .admin-container {
     width: 100%;
     margin: 0 auto;
@@ -876,6 +937,8 @@ h2 {
     margin-bottom: 15px;
   }
 
+  /* Form  */
+
   .form-container {
     padding: 1.5rem;
   }
@@ -889,6 +952,8 @@ h2 {
     padding: 0.75rem;
     font-size: 0.875rem;
   }
+
+  /* Search and Filter */
 
   .search-container input,
   .filter-container select {
@@ -913,6 +978,27 @@ h2 {
   .search,
   .filter {
     min-width: 100%;
+  }
+
+  /* Select Type */
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .button {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
   }
 
 }
