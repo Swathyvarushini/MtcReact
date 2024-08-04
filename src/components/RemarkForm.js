@@ -9,8 +9,8 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setRemarks({ ...remarks, [name]: value });
+    const value = e.target.value;
+    setRemarks(value);
     setIsSubmitDisabled(value.length <= 50);
   };
 
@@ -40,17 +40,25 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
       alert('Error submitting form');
     }
   };
+
   return (
     <div className='container-fluid remark-container'>
       <h3 className='form-title'>Inspection Form</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
         <label htmlFor='remarks' className='form-label'>Remarks</label>
-        <textarea name="remarks" id="remark" className='form-textarea' placeholder='Enter your comments' value={remarks} onChange={handleInputChange}></textarea>
-        <small className='info-text'>*required to filled</small>
+        <textarea
+          name="remarks"
+          id="remarks"
+          className='form-textarea'
+          placeholder='Enter your comments'
+          value={remarks}
+          onChange={handleInputChange}
+        ></textarea>
+        <small className='info-text'>*required to be filled</small>
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
       </form>
     </div>
   );
-}
+};
 
 export default RemarkForm;
