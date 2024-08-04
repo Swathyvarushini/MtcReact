@@ -15,6 +15,7 @@ import UserRegister from "./pages/Admin/UserRegister";
 import VehicleRegister from "./pages/Admin/VehicleRegister";
 import FormData from "./components/FormData";
 import SelectRole from './pages/Admin/SelectRole'; 
+import Record from "./pages/User/Record";
 
 const App = () => {
   return (
@@ -28,7 +29,7 @@ const App = () => {
 
 const AppRoutes = () => {
   const location = useLocation();
-  const isUserRoute = location.pathname.startsWith('/scanner') || location.pathname.startsWith('/form');
+  const isUserRoute = location.pathname.startsWith('/scanner') || location.pathname.startsWith('/form') || location.pathname.startsWith('/record');
   const isAdminRoute = location.pathname.startsWith('/home') || location.pathname.startsWith('/user-details') || location.pathname.startsWith('/vehicle-details') || location.pathname.startsWith('/inspection-details') || location.pathname.startsWith('/user-register') || location.pathname.startsWith('/vehicle-register');
 
   return (
@@ -40,6 +41,7 @@ const AppRoutes = () => {
         <Route path="/scanner" element={<ProtectedRoute><Scanner /></ProtectedRoute>} />
         <Route path="/formData" element={<ProtectedRoute><FormData /></ProtectedRoute>} />
         <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
+        <Route path="/record" element={<ProtectedRoute><Record/></ProtectedRoute>} />
         <Route path="/select-role" element={<ProtectedRoute><SelectRole /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/user-details" element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />

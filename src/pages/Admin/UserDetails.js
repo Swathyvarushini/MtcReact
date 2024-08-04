@@ -88,7 +88,7 @@ const UserDetails = () => {
     const filteredStaffDetails = staffDetails
         .filter(staff =>
             staff.staffNamePojo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            staff.username.toLowerCase().includes(searchTerm.toLowerCase())
+            staff.staffNumberPojo.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .filter(staff => filterCriteria === '' || staff.staffRolePojo === filterCriteria || staff.staffDesignationPojo === filterCriteria);
 
