@@ -39,9 +39,6 @@ const VehicleDetails = () => {
         setSearchTerm(e.target.value);
     };
 
-    const handleFilterChange = (e) => {
-        setFilterCriteria(e.target.value);
-    };
 
     const handleEditClick = (vehicle) => {
         setIsEditing(true);
@@ -98,7 +95,6 @@ const VehicleDetails = () => {
         <div className='user-container'>
             <div className='filters'>
                 <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
-                <Filter filterCriteria={filterCriteria} handleFilterChange={handleFilterChange} />
             </div>
             <h3 className='user-heading'>Vehicle Information</h3>
             {error && <div className='error'>{error}</div>}

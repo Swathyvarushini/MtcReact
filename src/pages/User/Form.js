@@ -5,12 +5,16 @@ import axios from 'axios';
 import CONFIG from '../../Config';
 import { useLocation } from 'react-router-dom';
 import FormData from '../../components/FormData';
+import { useSelector } from 'react-redux';
 
 export default function Form() {
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState('');
   const [username, setUsername] = useState('');
   const [formData, setFormData] = useState({});
+  const userInfo = useSelector((state) => state.user.userInfo);
+  console.log(userInfo);
+  
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -56,10 +60,12 @@ export default function Form() {
           <img src={icon} alt="icon" className='scanner__icon' />
           <h1 className='scanner__title'>MTC-THAMBARAM</h1>
           <div className="form__username">
-            <p>{username}</p>
-            <p>{formData.vehicleFleetNumberPojo}</p>
+            <p>{`Staff.No: ${userInfo.staffNumberPojo}`}</p>
+            <p>{`Name: ${userInfo.staffNamePojo}`}</p>
+            <p>{`Fleet.No: ${formData.vehicleFleetNumberPojo}`}</p>
+            <p className="form__datetime">{currentDate}</p>
           </div>
-          <p className="form__datetime">{currentDate}</p>
+          
         </div>
         <div className='form-body'>
           <FormData formData={formData} />

@@ -320,6 +320,16 @@ button {
   align-items: center;
 }
 
+
+.logo-image {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
 .logo-image {
   width: 80px;
   height: 60px;
