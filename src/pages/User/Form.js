@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 export default function Form() {
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState('');
-  const [username, setUsername] = useState('');
   const [fleetNumber, setFleetNumber] = useState('');
   const userInfo = useSelector((state) => state.user.userInfo);
 
@@ -25,17 +24,6 @@ export default function Form() {
         console.error('Error parsing data from URL:', error);
       }
     }
-
-    const token = localStorage.getItem('token');
-    axios.get(`${CONFIG.URL}/user/profile`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      }
-    }).then(response => {
-      setUsername(response.data.username);
-    }).catch(error => {
-      console.error('Error fetching user data:', error);
-    });
 
     const now = new Date();
     setCurrentDate(now.toLocaleString());
@@ -61,7 +49,7 @@ export default function Form() {
         </div>
       </div>
       <div className='form-body'>
-        <FormData username={username} fleetNumber={fleetNumber} token={localStorage.getItem('token')} date={currentDate} />
+        <FormData userInfo={userInfo} fleetNumber={fleetNumber} token={localStorage.getItem('token')} date={currentDate} />
       </div>
     </section>
   );

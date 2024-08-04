@@ -3,7 +3,7 @@ import axios from 'axios';
 import CONFIG from '../Config';
 import { useNavigate } from 'react-router-dom';
 
-const RemarkForm = ({ username, fleetNumber, token, date }) => {
+const RemarkForm = ({ userInfo, fleetNumber, token, date }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
@@ -11,18 +11,18 @@ const RemarkForm = ({ username, fleetNumber, token, date }) => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setRemarks(value);
-    setIsSubmitDisabled(value.length <= 50);
+    setIsSubmitDisabled(value.length <= 5);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(`${CONFIG.URL}/admin/FormDetails`, {
-        username,
-        fleetNumber,
-        remarks,
+      const response = await axios.post(`${CONFIG.URL}/admins/regForm`, {
+        staffNumberFormPojo: userInfo.staffNumber,
+        staffNameFormPojo: userInfo.staffName,
+        vehicleFleetNumberFormPojo:fleetNumber,
+        additionalInfoFormPojo:remarks,
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
