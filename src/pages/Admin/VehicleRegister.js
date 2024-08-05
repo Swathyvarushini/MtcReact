@@ -28,7 +28,6 @@ const VehicleRegister = () => {
             });
             setMessage(response.data);
             setError(null);
-            // Reset the form fields
             setFleetNo('');
             setServiceRoute('');
             setModel('');

@@ -49,7 +49,7 @@ export default function Form() {
         </div>
       </div>
       <div className='form-body'>
-        <FormData userInfo={userInfo} fleetNumber={fleetNumber} token={localStorage.getItem('token')} date={currentDate} />
+        <FormData userInfo={userInfo} fleetNumber={fleetNumber} token={localStorage.getItem('token')} />
       </div>
     </section>
   );
