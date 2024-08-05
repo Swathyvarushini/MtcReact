@@ -3,7 +3,7 @@ import axios from 'axios';
 import CONFIG from '../Config';
 import { useNavigate } from 'react-router-dom';
 
-const RemarkForm = ({ userInfo, fleetNumber, token, date }) => {
+const RemarkForm = ({ userInfo, fleetNumber, token }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
@@ -21,16 +21,16 @@ const RemarkForm = ({ userInfo, fleetNumber, token, date }) => {
       const response = await axios.post(`${CONFIG.URL}/admins/regForm`, {
         staffNumberFormPojo: userInfo.staffNumber,
         staffNameFormPojo: userInfo.staffName,
-        vehicleFleetNumberFormPojo:fleetNumber,
-        additionalInfoFormPojo:remarks,
+        vehicleFleetNumberFormPojo: fleetNumber,
+        additionalInfoFormPojo: remarks,
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-      if (response.data.success) {
-        alert('Form submitted successfully');
+      if (response.data) {
+        alert(response.data);
         navigate("/scanner");
       } else {
         alert('Form submission failed');

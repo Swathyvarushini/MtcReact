@@ -309,6 +309,12 @@ button {
   color: var(--white);
 }
 
+.form-btn:disabled {
+  background: var(--bg-gray);
+  color: var(--black);
+  cursor: not-allowed;
+}
+
 /* Navbar */
 .navbar-container {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -496,7 +502,6 @@ button {
   background-color: var(--bg-sky);
 }
 
-
 .responsive-table .btn {
   padding: 5px 10px;
   margin: 0 5px;
@@ -615,6 +620,43 @@ h2 {
   color: #888;
 }
 
+/* Date Filter */
+.date-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.date-input-container {
+  position: relative;
+  flex: 1;
+  min-width: 150px;
+}
+
+.date-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  background-color: transparent;
+}
+
+.date-input::before {
+  content: attr(placeholder);
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+.date-input:focus::before,
+.date-input:not(:placeholder-shown)::before {
+  display: none;
+}
 /* Filter */
 .filter-container {
   display: flex;
@@ -798,6 +840,37 @@ h2 {
   color: var(--white);
 }
 
+/* Record Card */
+.record-container {
+  padding: 20px;
+}
+
+.record-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.record-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card-body p {
+  margin: 5px 0;
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
@@ -970,7 +1043,13 @@ h2 {
     max-width: 100%;
     font-size: 0.9rem;
   }
-
+    .date-input {
+      font-size: 14px;
+    }
+  
+    .date-input-container {
+      min-width: 100px;
+    }
   .edit-form form {
     grid-template-columns: 1fr;
   }
@@ -990,6 +1069,11 @@ h2 {
     min-width: 100%;
   }
 
+  /* Record Card */
+    .cards-container {
+      flex-direction: column;
+      align-items: center;
+    }
   /* Select Type */
   .title {
     font-size: 1.5rem;

@@ -38,7 +38,7 @@ const UserRegister = () => {
             });
 
             if (response.data === 'Staff Registration SuccessFull') {
-                setMessage('Registration Successful!');
+                setMessage(response.data);
                 setFormData({
                     staffNo: '',
                     name: '',
