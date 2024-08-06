@@ -871,6 +871,14 @@ h2 {
   margin: 5px 0;
 }
 
+.download-btn{
+  display: block;
+  border: none;
+  background: transparent;
+  margin-left: auto;
+  cursor: pointer;
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
