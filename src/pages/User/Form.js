@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import icon from '../../assets/images/newlogo.png';
-import axios from 'axios';
-import CONFIG from '../../Config';
 import { useLocation } from 'react-router-dom';
 import FormData from '../../components/FormData';
-import { useSelector } from 'react-redux';
 
 export default function Form() {
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState('');
   const [fleetNumber, setFleetNumber] = useState('');
-  const userInfo = useSelector((state) => state.user.userInfo);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (storedUserInfo) {
+      setUserInfo(storedUserInfo);
+    }
+  }, []);
+
+
+  const { staffNumber, staffName } = userInfo;
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -42,8 +49,8 @@ export default function Form() {
         <img src={icon} alt="icon" className='scanner__icon' />
         <h1 className='scanner__title'>MTC-THAMBARAM</h1>
         <div className="form__username">
-          <p>{`Staff.No: ${userInfo.staffNumber}`}</p>
-          <p>{`Name: ${userInfo.staffName}`}</p>
+          <p>{`Staff.No: ${staffNumber}`}</p>
+          <p>{`Name: ${staffName}`}</p>
           <p>{`Fleet.No: ${fleetNumber}`}</p>
           <p className="form__datetime">{currentDate}</p>
         </div>
