@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
 import Search from '../../components/Search';
+import QRCodeGenerator from './QRCodeGenerator';
 
 const VehicleDetails = () => {
     const [vehicleDetails, setVehicleDetails] = useState([]);
@@ -95,6 +96,7 @@ const VehicleDetails = () => {
             <div className='filters'>
                 <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
             </div>
+            <QRCodeGenerator/>
             <h3 className='user-heading'>Vehicle Information</h3>
             {error && <div className='error'>{error}</div>}
             {isEditing && currentVehicle ? (
