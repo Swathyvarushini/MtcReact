@@ -5,6 +5,7 @@ import CONFIG from '../../Config';
 const Record = () => {
   const [records, setRecords] = useState([]);
   const [userInfo, setUserInfo] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -13,53 +14,57 @@ const Record = () => {
     }
   }, []);
 
+  const { staffNumber } = userInfo;
 
-  const { staffNumber} = userInfo;
-  console.log('Record', staffNumber);
-  
-  
   useEffect(() => {
     const fetchInspectionRecords = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {}, {
+        const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });
 
-        if (response.data) {
-          setRecords(response.data);
+        if (response.data && Array.isArray(response.data)) {
+          const filteredRecords = response.data.filter(record => record.staffNumberPojo === staffNumber);
+          setRecords(filteredRecords);
         } else {
-          console.error('No records found');
+          console.error('No valid records found');
+          setError('No valid records found');
         }
       } catch (error) {
         console.error('Error fetching inspection records:', error);
+        setError('Error fetching inspection records');
       }
     };
 
-    fetchInspectionRecords();
-  }, []);
-  console.log('records',records);
-  
+    if (staffNumber) {
+      fetchInspectionRecords();
+    }
+  }, [staffNumber]);
 
   return (
     <div className="record-container">
       <h3 className="record-title">Inspection Records</h3>
       <div className="cards-container">
-        {records.length > 0 ? (
-          records.map((record, index) => (
-            <div key={index} className="record-card">
-              <div className="card-body">
-                <p><strong>Fleet No:</strong> {record.vehicleFleetNumberFormPojo}</p>
-                <p><strong>Comments:</strong> {record.additionalInfoFormPojo}</p>
-                <p><strong>Date and Time of Submission:</strong> {record.dateAndTimeOfSubmission}</p>
-              </div>
-            </div>
-          ))
+        {error ? (
+          <p className="error-message">{error}</p>
         ) : (
-          <p>No records found</p>
+          records.length > 0 ? (
+            records.map((record, index) => (
+              <div key={index} className="record-card">
+                <div className="card-body">
+                  <p><strong>Fleet No:</strong> {record.vehicleFleetNumberFormPojo}</p>
+                  <p><strong>Comments:</strong> {record.additionalInfoFormPojo}</p>
+                  <p><strong>Date and Time of Submission:</strong> {record.dateAndTimeOfSubmission}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No records found</p>
+          )
         )}
       </div>
     </div>
