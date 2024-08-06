@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
-import { useSelector } from 'react-redux';
 
 const Record = () => {
   const [records, setRecords] = useState([]);
-  const userInfo = useSelector(state => state.user.userInfo);
+  const [userInfo, setUserInfo] = useState({});
 
+  useEffect(() => {
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (storedUserInfo) {
+      setUserInfo(storedUserInfo);
+    }
+  }, []);
+
+
+  const { staffNumber} = userInfo;
+  console.log('Record', staffNumber);
+  
+  
   useEffect(() => {
     const fetchInspectionRecords = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.post(`${CONFIG.URL}/admins/InspectionRecord/${userInfo.staffNumber}`, {}, {
+        const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {}, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -29,7 +40,9 @@ const Record = () => {
     };
 
     fetchInspectionRecords();
-  }, [userInfo]);
+  }, []);
+  console.log('records',records);
+  
 
   return (
     <div className="record-container">

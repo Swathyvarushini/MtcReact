@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CONFIG from '../../Config';
-import { useDispatch } from 'react-redux';
-import { fetchUserInfo } from '../../slice/userSlice';
 import busImage from '../../assets/images/bus.jpg';
 import icon from '../../assets/images/newlogo.png';
 
@@ -12,7 +10,6 @@ export default function Login() {
     const [errors, setErrors] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -52,10 +49,9 @@ export default function Login() {
             });
 
             if (response.data.token) {
-                console.log(response.data.token);
                 localStorage.setItem('token', response.data.token);
-                await dispatch(fetchUserInfo(response.data)); // Passing the whole response data
-                console.log('fetchUserInfo dispatched');
+                localStorage.setItem('userInfo', JSON.stringify(response.data)); // Store userInfo in localStorage
+
                 if (response.data.role === 'admin') {
                     navigate("/select-role");
                 } else {
