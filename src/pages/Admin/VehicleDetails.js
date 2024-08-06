@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
 import Search from '../../components/Search';
-import Filter from '../../components/Filter';
 
 const VehicleDetails = () => {
     const [vehicleDetails, setVehicleDetails] = useState([]);
