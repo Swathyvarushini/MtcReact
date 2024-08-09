@@ -1,10 +1,15 @@
 import React from 'react';
 import RemarkForm from './RemarkForm';
 
-const FormData = ({ userInfo, fleetNumber, token, date }) => {
+const FormData = ({ userInfo, fleetNumber, token, userLocation }) => {
     return (
         <div>
-            <RemarkForm userInfo={userInfo} fleetNumber={fleetNumber} token={token} />
+            <RemarkForm
+                userInfo={userInfo}
+                fleetNumber={fleetNumber}
+                token={token}
+                userLocation={userLocation} 
+            />
         </div>
     );
 };

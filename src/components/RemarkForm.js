@@ -3,7 +3,7 @@ import axios from 'axios';
 import CONFIG from '../Config';
 import { useNavigate } from 'react-router-dom';
 
-const RemarkForm = ({ userInfo, fleetNumber, token }) => {
+const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
@@ -23,6 +23,8 @@ const RemarkForm = ({ userInfo, fleetNumber, token }) => {
         staffNameFormPojo: userInfo.staffName,
         vehicleFleetNumberFormPojo: fleetNumber,
         additionalInfoFormPojo: remarks,
+        latitude: userLocation.lat,  
+        longitude: userLocation.lon  
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
