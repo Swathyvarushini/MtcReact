@@ -27,6 +27,7 @@ export const AdminNavbar = () => {
 
         if (isMenuOpen || openDropdown) {
             document.addEventListener('click', handleClickOutside);
+            
         } else {
             document.removeEventListener('click', handleClickOutside);
         }

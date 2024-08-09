@@ -22,6 +22,7 @@ export const UserNavbar = () => {
 
     return () => {
       document.removeEventListener('click', handleClickOutside);
+    
     };
   }, [isMenuOpen]);
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Loader from '../../components/Loader';
 import CONFIG from '../../Config';
 
 const UserRegister = () => {
@@ -12,17 +13,40 @@ const UserRegister = () => {
         mobileNumber: '',
         emailId: '',
     });
-
+    const [loading, setLoading] = useState(false); 
     const [message, setMessage] = useState('');
+    const [errors, setErrors]= useState('')
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
+        const errorsCopy = { ...errors };
+
+        if (name === 'mobileNumber') {
+            const mobileNumberPattern = /^[6-9]\d{9}$/;
+            if (!mobileNumberPattern.test(value)) {
+                errorsCopy.mobileNumber = 'Please enter a valid mobile number';
+            } else {
+                delete errorsCopy.mobileNumber;
+            }
+        }
+
+        if (name === 'emailId') {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(value)) {
+                errorsCopy.emailId = 'Please enter a valid email address';
+            } else {
+                delete errorsCopy.emailId;
+            }
+        }
+
+        setErrors(errorsCopy);
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         try {
             const response = await axios.post(`${CONFIG.URL}/admins/StaffReg`, {
                 staffNumberPojo: formData.staffNo,
@@ -59,7 +83,10 @@ const UserRegister = () => {
         } catch (error) {
             setMessage('An error occurred. Please try again.');
         } 
-    };
+        finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <div className="form-container">
@@ -136,6 +163,7 @@ const UserRegister = () => {
                         onChange={handleInputChange}
                         required
                     />
+                    {errors.mobileNumber && <small className="error-message">{errors.mobileNumber}</small>}
                 </div>
                 <div className="input-group">
                     <label htmlFor="emailId">Email ID</label>
@@ -148,9 +176,11 @@ const UserRegister = () => {
                         onChange={handleInputChange}
                         required
                     />
+                    {errors.emailId && <small className="error-message">{errors.emailId}</small>}
                 </div>
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
+            <Loader loading={loading} />
             {message && alert(message)}
         </div>
     );

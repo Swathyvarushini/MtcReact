@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Loader from '../../components/Loader';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import CONFIG from '../../Config';
@@ -69,6 +70,7 @@ const QRCodeGenerator = () => {
           <path fill="#107c41" d="M19.581 16H30v6.5H19.581Z" />
         </svg><span>Download QR Code</span>
       </button>
+      <Loader loading={loading} />
     </div>
   );
 };

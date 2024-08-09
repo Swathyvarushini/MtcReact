@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
+import Loader from '../../components/Loader';
 import Search from '../../components/Search';
 import Filter from '../../components/Filter';
 
 const UserDetails = () => {
     const [staffDetails, setStaffDetails] = useState([]);
+    const [loading, setLoading] = useState(false); 
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCriteria, setFilterCriteria] = useState('');
     const [error, setError] = useState(null);
@@ -18,6 +20,7 @@ const UserDetails = () => {
     }, []);
 
     const fetchStaffDetails = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(`${CONFIG.URL}/admins/viewStaff`, {
                 headers: {
@@ -28,6 +31,9 @@ const UserDetails = () => {
             setStaffDetails(response.data.reverse());
         } catch (error) {
             setError(error.response.data.message || 'An error occurred');
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -51,6 +57,7 @@ const UserDetails = () => {
     };
 
     const handleUpdate = async () => {
+        setLoading(true);
         try {
             const response = await axios.post(`${CONFIG.URL}/update/staffDetails`, currentStaff, {
                 headers: {
@@ -64,11 +71,15 @@ const UserDetails = () => {
         } catch (error) {
             setError(error.response.data.message || 'An error occurred');
         }
+        finally {
+            setLoading(false);
+        }
     };
 
     const handleDelete = async (staff) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
+            setLoading(true);
             try {
                 console.log("Delete Success");
                 const response = await axios.post(`${CONFIG.URL}/delete/staffDetails`, staff, {
@@ -81,6 +92,9 @@ const UserDetails = () => {
             } catch (error) {
                 console.log("Delete Unsuccess");
                 setError(error.response.data.message || 'An error occurred');
+            }
+            finally {
+                setLoading(false);
             }
         }
     };
@@ -202,6 +216,7 @@ const UserDetails = () => {
                     </table>
                 </div>
             )}
+            <Loader loading={loading} />
         </div>
     );
 };

@@ -142,6 +142,15 @@ button {
 
 .login__input-section {
   margin: 20px 0;
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: var(--btn-gray);
 }
 
 .login__input {
@@ -173,6 +182,23 @@ button {
 .login__error {
   color: var(--red);
   font-size: 12px;
+}
+/* Loader */
+.full-page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-content {
+  text-align: center;
 }
 
 /* Scanner */
@@ -434,8 +460,8 @@ button {
 
 .admin-profile {
   margin: 50px auto;
-  background: var(--bg-gray);
-  padding: 50px 20px;
+  background: var(--bg-sky);
+  padding: 50px 75px;
   border-radius: 20px;
 }
 
@@ -444,6 +470,8 @@ button {
   font-weight: 500;
   font-size: 24px;
   margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom:1px solid var(--border-sky)
 }
 
 .admin-row {
@@ -570,6 +598,10 @@ h2 {
 
 .input-group input::placeholder {
   color: var(--gray);
+}
+
+.error-message{
+  color: var(--red);
 }
 
 /* Submit button styling */
