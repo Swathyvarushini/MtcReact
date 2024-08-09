@@ -8,7 +8,7 @@ const FormData = ({ userInfo, fleetNumber, token, userLocation }) => {
                 userInfo={userInfo}
                 fleetNumber={fleetNumber}
                 token={token}
-                userLocation={userLocation} 
+                userLocation={userLocation}
             />
         </div>
     );

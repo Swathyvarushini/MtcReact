@@ -10,7 +10,7 @@ const Home = () => {
     }
   }, []);
 
-  const { staffNumber, staffName, role, branch } = userInfo;
+  const { staffNumber, staffName, role, branch, designation } = userInfo;
 
   return (
     <div className='admin-container'>
@@ -24,6 +24,10 @@ const Home = () => {
           <div className='admin-row'>
             <h5>Name</h5>
             <p>{staffName}</p>
+          </div>
+          <div className='admin-row'>
+            <h5>Designation</h5>
+            <p>{designation}</p>
           </div>
           <div className='admin-row'>
             <h5>Role</h5>
