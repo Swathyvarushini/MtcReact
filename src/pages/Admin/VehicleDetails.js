@@ -96,8 +96,8 @@ const VehicleDetails = () => {
             <div className='filters'>
                 <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
             </div>
-            <QRCodeGenerator/>
             <h3 className='user-heading'>Vehicle Information</h3>
+            <QRCodeGenerator />
             {error && <div className='error'>{error}</div>}
             {isEditing && currentVehicle ? (
                 <div className='edit-form'>

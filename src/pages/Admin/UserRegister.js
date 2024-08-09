@@ -7,6 +7,7 @@ const UserRegister = () => {
         staffNo: '',
         name: '',
         designation: '',
+        branch:'',
         role: '',
         mobileNumber: '',
         emailId: '',
@@ -27,6 +28,7 @@ const UserRegister = () => {
                 staffNumberPojo: formData.staffNo,
                 staffNamePojo: formData.name,
                 staffDesignationPojo: formData.designation,
+                staffBranchPojo:formData.branch,
                 staffRolePojo: formData.role,
                 staffMobileNumberPojo: formData.mobileNumber,
                 staffMailIdPojo: formData.emailId,
@@ -43,6 +45,7 @@ const UserRegister = () => {
                     staffNo: '',
                     name: '',
                     designation: '',
+                    branch: '',
                     role: '',
                     mobileNumber: '',
                     emailId: '',
@@ -68,7 +71,7 @@ const UserRegister = () => {
                         type="text"
                         id="staffNo"
                         name="staffNo"
-                        placeholder="Enter Staff No"
+                        placeholder="Staff No"
                         value={formData.staffNo}
                         onChange={handleInputChange}
                         required
@@ -80,7 +83,7 @@ const UserRegister = () => {
                         type="text"
                         id="name"
                         name="name"
-                        placeholder="Enter Name"
+                        placeholder="Name"
                         value={formData.name}
                         onChange={handleInputChange}
                         required
@@ -92,8 +95,20 @@ const UserRegister = () => {
                         type="text"
                         id="designation"
                         name="designation"
-                        placeholder="Enter Designation"
+                        placeholder="Designation"
                         value={formData.designation}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className="input-group">
+                    <label htmlFor="branch">Branch</label>
+                    <input
+                        type="text"
+                        id="branch"
+                        name="branch"
+                        placeholder="Branch"
+                        value={formData.branch}
                         onChange={handleInputChange}
                         required
                     />
@@ -104,7 +119,7 @@ const UserRegister = () => {
                         type="text"
                         id="role"
                         name="role"
-                        placeholder="Enter Role"
+                        placeholder="Role"
                         value={formData.role}
                         onChange={handleInputChange}
                         required
@@ -116,7 +131,7 @@ const UserRegister = () => {
                         type="tel"
                         id="mobileNumber"
                         name="mobileNumber"
-                        placeholder="Enter Mobile Number"
+                        placeholder="Mobile Number"
                         value={formData.mobileNumber}
                         onChange={handleInputChange}
                         required
@@ -128,7 +143,7 @@ const UserRegister = () => {
                         type="email"
                         id="emailId"
                         name="emailId"
-                        placeholder="Enter Email ID"
+                        placeholder="Email ID"
                         value={formData.emailId}
                         onChange={handleInputChange}
                         required

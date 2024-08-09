@@ -8,6 +8,7 @@ export default function Form() {
   const [currentDate, setCurrentDate] = useState('');
   const [fleetNumber, setFleetNumber] = useState('');
   const [userInfo, setUserInfo] = useState({});
+  const [userLocation, setUserLocation] = useState({ lat: null, lon: null });
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -15,9 +16,6 @@ export default function Form() {
       setUserInfo(storedUserInfo);
     }
   }, []);
-
-
-  const { staffNumber, staffName } = userInfo;
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -43,20 +41,43 @@ export default function Form() {
     return () => clearInterval(intervalId);
   }, [location]);
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }, []);
+
   return (
     <section className='container-fluid form-container'>
       <div className='form-header'>
         <img src={icon} alt="icon" className='scanner__icon' />
         <h1 className='scanner__title'>MTC-THAMBARAM</h1>
         <div className="form__username">
-          <p>{`Staff.No: ${staffNumber}`}</p>
-          <p>{`Name: ${staffName}`}</p>
+          <p>{`Staff.No: ${userInfo.staffNumber}`}</p>
+          <p>{`Name: ${userInfo.staffName}`}</p>
           <p>{`Fleet.No: ${fleetNumber}`}</p>
           <p className="form__datetime">{currentDate}</p>
         </div>
       </div>
       <div className='form-body'>
-        <FormData userInfo={userInfo} fleetNumber={fleetNumber} token={localStorage.getItem('token')} />
+        <FormData
+          userInfo={userInfo}
+          fleetNumber={fleetNumber}
+          token={localStorage.getItem('token')}
+          userLocation={userLocation} 
+        />
       </div>
     </section>
   );

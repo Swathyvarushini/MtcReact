@@ -9,6 +9,8 @@
   --bg-white: #fcfcfc;
   --bg-gray: #f2f2f2;
   --bg-sky: #f0f9ff;
+  --bg-light-green:#f0fdf4;
+  --bg-dark-green:#16a34a;
   --green: #22c55e;
   --red: #ef4444;
   --text-gray: #1f2937;
@@ -872,13 +874,21 @@ h2 {
 }
 
 .download-btn{
-  display: block;
-  border: none;
-  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  background: var(--bg-light-green);
+  font-size: 14px;
+  font-weight: 600;
   margin-left: auto;
   cursor: pointer;
 }
-
+.download-btn:hover{
+  background: var(--bg-dark-green);
+  color: var(--white);
+}
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
@@ -926,16 +936,35 @@ h2 {
   .login__icon,
   .scanner__icon {
     display: block;
-    width: 100px;
-    height: 75px;
+    width: 80px;
+    height: 60px;
     margin: 0 auto;
   }
-
-  .login__title,
+.scanner-container{
+  gap: 10px;
+}
   .scanner__title {
     text-align: center;
+    font-size: 14px;
   }
-
+  .scanner__desc{
+    font-size: 13px;
+  }
+  /* Scanner */
+    .video-scanner{
+      width: 300px;
+        max-width: 400px;
+        height:auto;
+        display: block;
+    }
+    .scan-button{
+      padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        
+    }
   .login__subtitle {
     display: block;
     text-align: center;
