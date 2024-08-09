@@ -7,7 +7,10 @@ export const AdminNavbar = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-    const closeMenu = () => setIsMenuOpen(false);
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+        setOpenDropdown(null);
+    }
 
     const handleDropdown = (dropdown) => {
         if (openDropdown === dropdown) {

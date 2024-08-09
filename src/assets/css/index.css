@@ -662,13 +662,16 @@ h2 {
 }
 
 .date-input-container {
-  position: relative;
   flex: 1;
   min-width: 150px;
+  z-index:-1;
 }
 
 .date-input {
-  width: 100%;
+  display: block;
+  width: 200px;
+  margin: 20px 0;
+  margin-left: auto;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -677,20 +680,7 @@ h2 {
   background-color: transparent;
 }
 
-.date-input::before {
-  content: attr(placeholder);
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #888;
-  pointer-events: none;
-}
 
-.date-input:focus::before,
-.date-input:not(:placeholder-shown)::before {
-  display: none;
-}
 /* Filter */
 .filter-container {
   display: flex;
@@ -921,6 +911,7 @@ h2 {
   background: var(--bg-dark-green);
   color: var(--white);
 }
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
@@ -986,7 +977,7 @@ h2 {
     .video-scanner{
       width: 300px;
         max-width: 400px;
-        height:auto;
+        height:300px;
         display: block;
     }
     .scan-button{

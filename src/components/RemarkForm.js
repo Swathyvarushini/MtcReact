@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -25,8 +25,8 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         staffNameFormPojo: userInfo.staffName,
         vehicleFleetNumberFormPojo: fleetNumber,
         additionalInfoFormPojo: remarks,
-        latitude: userLocation.lat,  
-        longitude: userLocation.lon  
+        latitude: userLocation.lat,
+        longitude: userLocation.lon
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -43,7 +43,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
       console.error('Error submitting form:', error);
       alert('Error submitting form');
     }
-    finally{
+    finally {
       setLoading(false);
     }
   };
@@ -64,7 +64,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         <small className='info-text'>*required to be filled</small>
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
       </form>
-      <Loader loading={loading}/>
+      <Loader loading={loading} />
     </div>
   );
 };

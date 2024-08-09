@@ -3,12 +3,12 @@ import axios from 'axios';
 import CONFIG from '../../Config';
 import Loader from '../../components/Loader';
 
-
 const Record = () => {
   const [records, setRecords] = useState([]);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState(null);
+  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -52,25 +52,54 @@ const Record = () => {
     }
   }, [staffNumber]);
 
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const filteredRecords = selectedDate
+    ? records.filter(record => {
+      const recordDate = new Date(record.dateAndTimeOfSubmission).toISOString().split('T')[0];
+      return recordDate === selectedDate;
+    })
+    : records;
+
   return (
     <div className="record-container">
       <h3 className="record-title">Inspection Records</h3>
+
+      <div className="date-input-container">
+        <input
+          type="date"
+          id="dateFilter"
+          value={selectedDate}
+          onChange={handleDateChange}
+          className='date-input'
+        />
+      </div>
+
       <div className="cards-container">
         {error ? (
           <p className="error-message">{error}</p>
         ) : (
-          records.length > 0 ? (
-            records.map((record, index) => (
-              <div key={index} className="record-card">
-                <div className="card-body">
-                  <p><strong>Fleet No:</strong> {record.vehicleFleetNumberFormPojo}</p>
-                  <p><strong>Comments:</strong> {record.additionalInfoFormPojo}</p>
-                  <p><strong>Date and Time of Submission:</strong> {record.dateAndTimeOfSubmission}</p>
+          filteredRecords.length > 0 ? (
+            filteredRecords.map((record, index) => {
+              const recordDateTime = new Date(record.dateAndTimeOfSubmission);
+              const formattedDate = recordDateTime.toLocaleDateString(); 
+              const formattedTime = recordDateTime.toLocaleTimeString(); 
+
+              return (
+                <div key={index} className="record-card">
+                  <div className="card-body">
+                    <p><strong>Fleet No:</strong> {record.vehicleFleetNumberFormPojo}</p>
+                    <p><strong>Comments:</strong> {record.additionalInfoFormPojo}</p>
+                    <p><strong>Date of Submission:</strong> {formattedDate}</p>
+                    <p><strong>Time of Submission:</strong> {formattedTime}</p>
+                  </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            <p>No records found</p>
+            <p>No records found for the selected date</p>
           )
         )}
       </div>
