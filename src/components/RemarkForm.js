@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../Config';
+import Loader from './Loader';
 import { useNavigate } from 'react-router-dom';
 
 const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -16,7 +18,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post(`${CONFIG.URL}/admins/regForm`, {
         staffNumberFormPojo: userInfo.staffNumber,
@@ -41,6 +43,9 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
       console.error('Error submitting form:', error);
       alert('Error submitting form');
     }
+    finally{
+      setLoading(false);
+    }
   };
 
   return (
@@ -59,6 +64,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         <small className='info-text'>*required to be filled</small>
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
       </form>
+      <Loader loading={loading}/>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
+import Loader from '../../components/Loader';
 import Search from '../../components/Search';
 import QRCodeGenerator from './QRCodeGenerator';
 
 const VehicleDetails = () => {
     const [vehicleDetails, setVehicleDetails] = useState([]);
+    const [loading, setLoading] = useState(false); 
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCriteria, setFilterCriteria] = useState('');
     const [error, setError] = useState(null);
@@ -22,6 +24,7 @@ const VehicleDetails = () => {
     }, []);
 
     const fetchVehicleDetails = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(`${CONFIG.URL}/admins/viewVehicles`, {
                 headers: {
@@ -32,6 +35,9 @@ const VehicleDetails = () => {
             setVehicleDetails(response.data.reverse());
         } catch (error) {
             setError(error.response?.data?.message || 'An error occurred');
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -51,6 +57,7 @@ const VehicleDetails = () => {
     };
 
     const handleUpdate = async () => {
+        setLoading(true);
         try {
             const response = await axios.post(`${CONFIG.URL}/update/vehicleDetails`, currentVehicle, {
                 headers: {
@@ -64,11 +71,15 @@ const VehicleDetails = () => {
         } catch (error) {
             setError(error.response.data.message || 'An error occurred');
         }
+        finally {
+            setLoading(false);
+        }
     };
 
     const handleDelete = async (vehicle) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
+            setLoading(true);
             try {
                 console.log("Delete Success");
                 const response = await axios.post(`${CONFIG.URL}/delete/vehicleDetails`, vehicle, {
@@ -81,6 +92,9 @@ const VehicleDetails = () => {
             } catch (error) {
                 console.log("Delete Unsuccessful");
                 setError(error.response.data.message || 'An error occurred');
+            }
+            finally {
+                setLoading(false);
             }
         }
     };
@@ -176,6 +190,7 @@ const VehicleDetails = () => {
                     </table>
                 </div>
             )}
+            <Loader loading={loading} />
         </div>
     );
 };

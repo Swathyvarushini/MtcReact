@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
+import Loader from '../../components/Loader';
+
 
 const Record = () => {
   const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(false); 
   const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState(null);
 
@@ -18,6 +21,7 @@ const Record = () => {
 
   useEffect(() => {
     const fetchInspectionRecords = async () => {
+      setLoading(true);
       try {
         const token = localStorage.getItem('token');
         const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {
@@ -28,8 +32,8 @@ const Record = () => {
         });
 
         if (response.data && Array.isArray(response.data)) {
-          const filteredRecords = response.data.filter(record => record.staffNumberPojo === staffNumber);
-          setRecords(filteredRecords);
+          const filteredRecords = response.data.filter(record => record.staffNumberFormPojo === staffNumber);
+          setRecords(filteredRecords.reverse());
         } else {
           console.error('No valid records found');
           setError('No valid records found');
@@ -37,6 +41,9 @@ const Record = () => {
       } catch (error) {
         console.error('Error fetching inspection records:', error);
         setError('Error fetching inspection records');
+      }
+      finally {
+        setLoading(false);
       }
     };
 
@@ -67,6 +74,7 @@ const Record = () => {
           )
         )}
       </div>
+      <Loader loading={loading} />
     </div>
   );
 };

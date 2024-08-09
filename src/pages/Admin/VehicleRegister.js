@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
+import Loader from '../../components/Loader';
 
 const VehicleRegister = () => {
     const [fleetNo, setFleetNo] = useState('');
     const [serviceRoute, setServiceRoute] = useState('');
     const [model, setModel] = useState('');
     const [doc, setDoc] = useState('');
+    const [loading, setLoading] = useState(false); 
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
 
@@ -18,7 +20,7 @@ const VehicleRegister = () => {
             vehicleModelPojo: model,
             vehicleDateOfCommencementPojo: doc,
         };
-
+        setLoading(true);
         try {
             const response = await axios.post(`${CONFIG.URL}/admins/regVehicle`, vehicleData, {
                 headers: {
@@ -35,6 +37,8 @@ const VehicleRegister = () => {
         } catch (error) {
             setError(error.response.data.message || 'An error occurred');
             setMessage(null);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -93,6 +97,7 @@ const VehicleRegister = () => {
                 </div>
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
+            <Loader loading={loading} />
         </div>
     );
 }
