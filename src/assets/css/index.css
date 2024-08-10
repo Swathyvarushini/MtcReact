@@ -163,6 +163,7 @@ button {
   width: 100px;
   background: var(--btn-black);
   color: var(--white);
+  cursor: pointer;
 }
 
 .login__btn:hover {
