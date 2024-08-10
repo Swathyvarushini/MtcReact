@@ -974,7 +974,7 @@ h2 {
 
   .scanner__title {
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .scanner__desc {
@@ -992,12 +992,11 @@ h2 {
   }
 
   .scan-button {
-    padding: 5px 10px;
-    font-size: 12px;
+    padding: 10px 20px;
+    font-size: 14px;
     font-weight: 600;
     margin-bottom: 10px;
     border-radius: 4px;
-
   }
 
   .login__subtitle {
