@@ -12,9 +12,23 @@ const QRCodeGenerator = () => {
   const generateQRCode = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`${CONFIG.URL}/api/qr/generate`, {}, {
-        responseType: 'arraybuffer',
-      });
+      const token = localStorage.getItem('token'); 
+
+      if (!token) {
+        throw new Error('Token is missing. Please log in again.');
+      }
+
+      const response = await axios.post(
+        `${CONFIG.URL}/api/qr/generate`,
+        {},
+        {
+          responseType: 'arraybuffer',
+          headers: {
+            'Authorization': `Bearer ${token}`, 
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const zip = new JSZip();
       const contents = await zip.loadAsync(response.data);
@@ -31,6 +45,7 @@ const QRCodeGenerator = () => {
       setZipFile(zipBlob);
     } catch (error) {
       console.error('Error generating QR codes:', error);
+      alert('Error generating QR codes. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -45,6 +60,7 @@ const QRCodeGenerator = () => {
       saveAs(zipFile, 'qrcodes.zip');
     }
   };
+
 
   return (
     <div>

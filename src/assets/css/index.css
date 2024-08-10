@@ -9,8 +9,8 @@
   --bg-white: #fcfcfc;
   --bg-gray: #f2f2f2;
   --bg-sky: #f0f9ff;
-  --bg-light-green:#f0fdf4;
-  --bg-dark-green:#16a34a;
+  --bg-light-green: #f0fdf4;
+  --bg-dark-green: #16a34a;
   --green: #22c55e;
   --red: #ef4444;
   --text-gray: #1f2937;
@@ -183,6 +183,7 @@ button {
   color: var(--red);
   font-size: 12px;
 }
+
 /* Loader */
 .full-page-loader {
   position: fixed;
@@ -364,6 +365,7 @@ button {
   display: flex;
   gap: 20px;
 }
+
 .logo-image {
   width: 80px;
   height: 60px;
@@ -471,7 +473,7 @@ button {
   font-size: 24px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-  border-bottom:1px solid var(--border-sky)
+  border-bottom: 1px solid var(--border-sky)
 }
 
 .admin-row {
@@ -600,7 +602,7 @@ h2 {
   color: var(--gray);
 }
 
-.error-message{
+.error-message {
   color: var(--red);
 }
 
@@ -664,7 +666,7 @@ h2 {
 .date-input-container {
   flex: 1;
   min-width: 150px;
-  z-index:-1;
+  z-index: -1;
 }
 
 .date-input {
@@ -895,7 +897,7 @@ h2 {
   margin: 5px 0;
 }
 
-.download-btn{
+.download-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -907,7 +909,8 @@ h2 {
   margin-left: auto;
   cursor: pointer;
 }
-.download-btn:hover{
+
+.download-btn:hover {
   background: var(--bg-dark-green);
   color: var(--white);
 }
@@ -963,31 +966,39 @@ h2 {
     height: 60px;
     margin: 0 auto;
   }
-.scanner-container{
-  gap: 10px;
-}
+
+  .scanner-container {
+    gap: 10px;
+  }
+
   .scanner__title {
     text-align: center;
     font-size: 14px;
   }
-  .scanner__desc{
+
+  .scanner__desc {
     font-size: 13px;
   }
+
   /* Scanner */
-    .video-scanner{
-      width: 300px;
-        max-width: 400px;
-        height:300px;
-        display: block;
-    }
-    .scan-button{
-      padding: 5px 10px;
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        border-radius: 4px;
-        
-    }
+  .video-scanner {
+    width: 400px;
+    height: 400px;
+    max-width: 600px;
+    max-height: 600px;
+
+    display: block;
+  }
+
+  .scan-button {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-radius: 4px;
+
+  }
+
   .login__subtitle {
     display: block;
     text-align: center;
@@ -1103,13 +1114,15 @@ h2 {
     max-width: 100%;
     font-size: 0.9rem;
   }
-    .date-input {
-      font-size: 14px;
-    }
-  
-    .date-input-container {
-      min-width: 100px;
-    }
+
+  .date-input {
+    font-size: 14px;
+  }
+
+  .date-input-container {
+    min-width: 100px;
+  }
+
   .edit-form form {
     grid-template-columns: 1fr;
   }
@@ -1130,10 +1143,11 @@ h2 {
   }
 
   /* Record Card */
-    .cards-container {
-      flex-direction: column;
-      align-items: center;
-    }
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
   /* Select Type */
   .title {
     font-size: 1.5rem;
