@@ -8,7 +8,7 @@ export default function Scanner() {
     <>
       <section className="container-fluid scanner">
         <img src={icon} alt="icon" className='scanner__icon' />
-        <h1 className='scanner__title'>MTC-THAMBARAM</h1>
+        <h1 className='scanner__title'>MTC-TAMBARAM</h1>
         <p className='scanner__desc'>Click the button, scan the QR code, to access the form.</p>
         <ScannerElement />
       </section>

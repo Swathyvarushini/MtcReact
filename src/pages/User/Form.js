@@ -63,7 +63,7 @@ export default function Form() {
     <section className='container-fluid form-container'>
       <div className='form-header'>
         <img src={icon} alt="icon" className='scanner__icon' />
-        <h1 className='scanner__title'>MTC-THAMBARAM</h1>
+        <h1 className='scanner__title'>MTC-TAMBARAM</h1>
         <div className="form__username">
           <p>{`Staff.No: ${userInfo.staffNumber}`}</p>
           <p>{`Name: ${userInfo.staffName}`}</p>
