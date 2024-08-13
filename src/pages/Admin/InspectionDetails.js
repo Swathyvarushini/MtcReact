@@ -68,7 +68,7 @@ const InspectionDetails = () => {
 
     const downloadCSV = () => {
         const csvRows = [
-            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Comments', 'Date.of.Submission', 'Location'],
+            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Comments', 'Date.of.Submission'],
             ...filteredData.map((data, index) => [
                 index + 1,
                 data.vehicleFleetNumberFormPojo,
@@ -76,7 +76,7 @@ const InspectionDetails = () => {
                 data.staffNameFormPojo || 'NA',
                 data.additionalInfoFormPojo,
                 data.dateAndTimeOfSubmission,
-                data.staffLocationPojo
+                // data.staffLocationPojo
             ]),
         ];
 
@@ -144,7 +144,7 @@ const InspectionDetails = () => {
                             <th>Name</th>
                             <th>Comments</th>
                             <th>Date.of.Submission</th>
-                            <th>Location</th>
+                            {/* <th>Location</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -157,12 +157,12 @@ const InspectionDetails = () => {
                                     <td>{data.staffNameFormPojo || 'NA'}</td>
                                     <td>{data.additionalInfoFormPojo}</td>
                                     <td>{data.dateAndTimeOfSubmission}</td>
-                                    <td><a href={data.staffLocationPojo} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                    {/* <td><a href={data.staffLocationPojo} target="_blank" rel="noopener noreferrer">Click Here</a></td> */}
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="7">No data available</td>
+                                <td colSpan="6">No data available</td>
                             </tr>
                         )}
                     </tbody>
