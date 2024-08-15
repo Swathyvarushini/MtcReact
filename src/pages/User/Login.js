@@ -85,7 +85,7 @@ export default function Login() {
                 </div>
                 <div className='login__content'>
                     <img src={icon} alt="icon" className='login__icon' />
-                    <h1 className='login__title'>MTC-THAMBARAM</h1>
+                    <h1 className='login__title'>MTC-TAMBARAM</h1>
                     <small className='login__subtitle'>An app for bus inspection report</small>
                     <form method='POST' onSubmit={handleFormSubmit} className='login__form'>
                         <div className='login__input-section'>
