@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
+import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../components/Loader';
 import Search from '../../components/Search';
 import Filter from '../../components/Filter';
@@ -27,7 +28,6 @@ const UserDetails = () => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log(response.data);
             setStaffDetails(response.data.reverse());
         } catch (error) {
             setError(error.response.data.message || 'An error occurred');
@@ -64,12 +64,28 @@ const UserDetails = () => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log(response.data);
             fetchStaffDetails();
+            toast.success('Updated successfully', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             setIsEditing(false);
             setCurrentStaff(null);
         } catch (error) {
-            setError(error.response.data.message || 'An error occurred');
+            toast.error('An error occurred. Please try again.', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
         finally {
             setLoading(false);
@@ -87,10 +103,8 @@ const UserDetails = () => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
-                console.log(response.data);
                 fetchStaffDetails();
             } catch (error) {
-                console.log("Delete Unsuccess");
                 setError(error.response.data.message || 'An error occurred');
             }
             finally {
@@ -178,7 +192,6 @@ const UserDetails = () => {
                         </div>
                     </form>
                 </div>
-
             ) : (
                 <div className="table-container">
                     <table className="responsive-table">
@@ -217,6 +230,7 @@ const UserDetails = () => {
                 </div>
             )}
             <Loader loading={loading} />
+            <ToastContainer />
         </div>
     );
 };

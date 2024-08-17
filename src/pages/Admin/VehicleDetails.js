@@ -3,6 +3,7 @@ import axios from 'axios';
 import CONFIG from '../../Config';
 import Loader from '../../components/Loader';
 import Search from '../../components/Search';
+import { ToastContainer, toast } from 'react-toastify';
 import QRCodeGenerator from './QRCodeGenerator';
 
 const VehicleDetails = () => {
@@ -31,7 +32,6 @@ const VehicleDetails = () => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log("Vehicle data", response.data);
             setVehicleDetails(response.data.reverse());
         } catch (error) {
             setError(error.response?.data?.message || 'An error occurred');
@@ -64,12 +64,28 @@ const VehicleDetails = () => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log(response.data);
+            toast.success('Updated successfully', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             fetchVehicleDetails();
             setIsEditing(false);
             setCurrentVehicle(null);
         } catch (error) {
-            setError(error.response.data.message || 'An error occurred');
+            toast.error('An error occurred. Please try again.', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
         finally {
             setLoading(false);
@@ -158,6 +174,7 @@ const VehicleDetails = () => {
                             <button type="button" onClick={handleUpdate}>Save</button>
                         </div>
                     </form>
+                   
                 </div>
             ) : (
                 <div className="table-container">
@@ -191,6 +208,7 @@ const VehicleDetails = () => {
                 </div>
             )}
             <Loader loading={loading} />
+            <ToastContainer />
         </div>
     );
 };

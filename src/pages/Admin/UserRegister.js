@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Loader from '../../components/Loader';
+import { ToastContainer, toast } from 'react-toastify';
 import CONFIG from '../../Config';
 
 const UserRegister = () => {
@@ -14,7 +15,6 @@ const UserRegister = () => {
         emailId: '',
     });
     const [loading, setLoading] = useState(false); 
-    const [message, setMessage] = useState('');
     const [errors, setErrors]= useState('')
 
     const handleInputChange = (e) => {
@@ -64,7 +64,6 @@ const UserRegister = () => {
             });
 
             if (response.data === 'Staff Registration SuccessFull') {
-                setMessage(response.data);
                 setFormData({
                     staffNo: '',
                     name: '',
@@ -74,14 +73,36 @@ const UserRegister = () => {
                     mobileNumber: '',
                     emailId: '',
                 });
-               
-
+                toast.success('Registration Successful!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             } else {
-                setMessage(response.data);
-                
+                toast.error(response.data || 'Registration failed. Please try again.', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         } catch (error) {
-            setMessage('An error occurred. Please try again.');
+            toast.error('An error occurred. Please try again.', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         } 
         finally {
             setLoading(false);
@@ -181,7 +202,7 @@ const UserRegister = () => {
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
             <Loader loading={loading} />
-            {message && alert(message)}
+            <ToastContainer />
         </div>
     );
 }

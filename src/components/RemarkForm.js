@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../Config';
 import Loader from './Loader';
+import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
@@ -34,14 +35,37 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         }
       });
       if (response.data) {
-        alert(response.data);
+        toast.success('Form successfully submitted', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         navigate("/scanner");
       } else {
-        alert('Form submission failed');
+        toast.error('Form submission failed', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Error submitting form');
+      toast.error('An error occurred. Please try again later', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     finally {
       setLoading(false);
@@ -65,6 +89,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
       </form>
       <Loader loading={loading} />
+      <ToastContainer/>
     </div>
   );
 };
