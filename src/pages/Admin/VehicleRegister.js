@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import CONFIG from '../../Config';
+import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../components/Loader';
 
 const VehicleRegister = () => {
@@ -9,8 +10,6 @@ const VehicleRegister = () => {
     const [model, setModel] = useState('');
     const [doc, setDoc] = useState('');
     const [loading, setLoading] = useState(false); 
-    const [message, setMessage] = useState(null);
-    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,15 +27,29 @@ const VehicleRegister = () => {
                     'Content-Type': 'application/json',
                 },
             });
-            setMessage(response.data);
-            setError(null);
             setFleetNo('');
             setServiceRoute('');
             setModel('');
             setDoc('');
+            toast.success('Registration Successful!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         } catch (error) {
-            setError(error.response.data.message || 'An error occurred');
-            setMessage(null);
+            toast.error('An error occurred. Please try again.', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         } finally {
             setLoading(false);
         }
@@ -45,8 +58,6 @@ const VehicleRegister = () => {
     return (
         <div className="form-container">
             <h2>Vehicle Registration</h2>
-            {message && alert(message)}
-            {error && alert(error)}
             <form className="registration-form" onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label htmlFor="fleetNo">Fleet.No</label>
@@ -98,6 +109,7 @@ const VehicleRegister = () => {
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
             <Loader loading={loading} />
+            <ToastContainer />
         </div>
     );
 }
