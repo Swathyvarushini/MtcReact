@@ -78,7 +78,7 @@ export default function Form() {
         </div>
       </div>
       <div className='form-body'>
-        {formType === 'remark' && (
+        {formType === 'InspectionForm' && (
           <RemarkForm
             userInfo={userInfo}
             fleetNumber={fleetNumber}
@@ -86,7 +86,7 @@ export default function Form() {
             userLocation={userLocation}
           />
         )}
-        {formType === 'security' && (
+        {formType === 'SecurityForm' && (
           <SecurityForm
             userInfo={userInfo}
             fleetNumber={fleetNumber}
@@ -94,7 +94,7 @@ export default function Form() {
             userLocation={userLocation}
           />
         )}
-        {formType === 'timekeepup' && (
+        {formType === 'TimekeeperForm' && (
           <TimeKeeperForm
             userInfo={userInfo}
             fleetNumber={fleetNumber}

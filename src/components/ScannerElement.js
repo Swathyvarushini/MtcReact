@@ -22,9 +22,9 @@ export default function ScannerElement() {
                         if (result.data.includes("InspectionForm")) {
                             navigate(`/form?data=${encodeURIComponent(result.data)}&formType=InspectionForm`);
                         } else if (result.data.includes("SecurityForm")) {
-                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=SecurityForm`);
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=securityForm`);
                         } else if (result.data.includes("TimekeeperForm")) {
-                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=TimekeeperForm`);
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=timekeeperForm`);
                         } else {
                             setError('Unrecognized QR code');
                         }
