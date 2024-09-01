@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import icon from '../../assets/images/newlogo.png';
 import { useLocation } from 'react-router-dom';
-import FormData from '../../components/FormData';
+import RemarkForm from '../../components/RemarkForm';
+import SecurityForm from '../../components/SecurityForm';
+import TimeKeepupForm from '../../components/TimeKeepupForm';
 
 export default function Form() {
   const location = useLocation();
@@ -9,6 +11,7 @@ export default function Form() {
   const [fleetNumber, setFleetNumber] = useState('');
   const [userInfo, setUserInfo] = useState({});
   const [userLocation, setUserLocation] = useState({ lat: null, lon: null });
+  const [formType, setFormType] = useState('');
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -20,6 +23,9 @@ export default function Form() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const dataParam = params.get('data');
+    const formTypeParam = params.get('formType');
+    setFormType(formTypeParam);
+
     if (dataParam) {
       try {
         const decodedData = decodeURIComponent(dataParam);
@@ -72,12 +78,30 @@ export default function Form() {
         </div>
       </div>
       <div className='form-body'>
-        <FormData
-          userInfo={userInfo}
-          fleetNumber={fleetNumber}
-          token={localStorage.getItem('token')}
-          userLocation={userLocation} 
-        />
+        {formType === 'remark' && (
+          <RemarkForm
+            userInfo={userInfo}
+            fleetNumber={fleetNumber}
+            token={localStorage.getItem('token')}
+            userLocation={userLocation}
+          />
+        )}
+        {formType === 'security' && (
+          <SecurityForm
+            userInfo={userInfo}
+            fleetNumber={fleetNumber}
+            token={localStorage.getItem('token')}
+            userLocation={userLocation}
+          />
+        )}
+        {formType === 'timekeepup' && (
+          <TimeKeepupForm
+            userInfo={userInfo}
+            fleetNumber={fleetNumber}
+            token={localStorage.getItem('token')}
+            userLocation={userLocation}
+          />
+        )}
       </div>
     </section>
   );
