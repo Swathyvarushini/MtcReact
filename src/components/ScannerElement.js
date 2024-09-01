@@ -19,12 +19,12 @@ export default function ScannerElement() {
                         setQrCodeResult(result.data);
                         setScanning(false);
                         qrScanner.stop();
-                        if (result.data.includes("remark")) {
-                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=remark`);
-                        } else if (result.data.includes("security")) {
-                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=security`);
-                        } else if (result.data.includes("timekeepup")) {
-                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=timekeepup`);
+                        if (result.data.includes("InspectionForm")) {
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=InspectionForm`);
+                        } else if (result.data.includes("SecurityForm")) {
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=SecurityForm`);
+                        } else if (result.data.includes("TimekeeperForm")) {
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=TimekeeperForm`);
                         } else {
                             setError('Unrecognized QR code');
                         }

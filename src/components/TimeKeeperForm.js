@@ -5,7 +5,7 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const TimeKeepupForm = ({ userInfo, fleetNumber, token, userLocation }) => {
+const TimeKeeperForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const [remarks, setRemarks] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ const TimeKeepupForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${CONFIG.URL}/admins/timekeepupForm`, {
+      const response = await axios.post(`${CONFIG.URL}/admins/timekeeperForm`, {
         staffNumberFormPojo: userInfo.staffNumber,
         staffNameFormPojo: userInfo.staffName,
         vehicleFleetNumberFormPojo: fleetNumber,
@@ -74,7 +74,7 @@ const TimeKeepupForm = ({ userInfo, fleetNumber, token, userLocation }) => {
 
   return (
     <div className='container-fluid remark-container'>
-      <h3 className='form-title'>Time Keep-up Form</h3>
+      <h3 className='form-title'>Time Keeper Form</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
         <label htmlFor='remarks' className='form-label'>Remarks</label>
         <textarea
@@ -94,4 +94,4 @@ const TimeKeepupForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   );
 };
 
-export default TimeKeepupForm;
+export default TimeKeeperForm;

@@ -3,7 +3,7 @@ import icon from '../../assets/images/newlogo.png';
 import { useLocation } from 'react-router-dom';
 import RemarkForm from '../../components/RemarkForm';
 import SecurityForm from '../../components/SecurityForm';
-import TimeKeepupForm from '../../components/TimeKeepupForm';
+import TimeKeeperForm from '../../components/TimeKeeperForm';
 
 export default function Form() {
   const location = useLocation();
@@ -95,7 +95,7 @@ export default function Form() {
           />
         )}
         {formType === 'timekeepup' && (
-          <TimeKeepupForm
+          <TimeKeeperForm
             userInfo={userInfo}
             fleetNumber={fleetNumber}
             token={localStorage.getItem('token')}
