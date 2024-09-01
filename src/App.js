@@ -13,7 +13,6 @@ import VehicleDetails from "./pages/Admin/VehicleDetails";
 import InspectionDetails from "./pages/Admin/InspectionDetails";
 import UserRegister from "./pages/Admin/UserRegister";
 import VehicleRegister from "./pages/Admin/VehicleRegister";
-import FormData from "./components/FormData";
 import SelectRole from './pages/Admin/SelectRole'; 
 import Record from "./pages/User/Record";
 
@@ -39,7 +38,6 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/scanner" element={<ProtectedRoute><Scanner /></ProtectedRoute>} />
-        <Route path="/formData" element={<ProtectedRoute><FormData /></ProtectedRoute>} />
         <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
         <Route path="/record" element={<ProtectedRoute><Record/></ProtectedRoute>} />
         <Route path="/select-role" element={<ProtectedRoute><SelectRole /></ProtectedRoute>} />
