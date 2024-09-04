@@ -971,9 +971,11 @@ h2 {
   .scanner-container {
     gap: 10px;
   }
-  .login__title{
+
+  .login__title {
     text-align: center;
   }
+
   .scanner__title {
     text-align: center;
     font-size: 18px;
@@ -985,11 +987,10 @@ h2 {
 
   /* Scanner */
   .video-scanner {
-    width: 800px;
-    height: 400px;
+    width: 340px;
+    height: 250px;
     max-width: 1000px;
     max-height: 600px;
-
     display: block;
   }
 
