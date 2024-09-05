@@ -30,6 +30,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     missingPropertyPojo: '',
     remarks: ''
   });
+
   const [loading, setLoading] = useState(false);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
@@ -133,7 +134,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
             </div>
           </div>
         ))}
-
         <label htmlFor='remarks' className='form-label'>Remarks</label>
         <textarea
           name="remarks"
@@ -144,6 +144,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
           onChange={handleInputChange}
         ></textarea>
         <small className='info-text'>*required to be filled</small>
+
         <button type="submit" className='form-btn' disabled={isSubmitDisabled}>
           Submit
         </button>
