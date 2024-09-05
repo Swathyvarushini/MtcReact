@@ -916,6 +916,25 @@ h2 {
   color: var(--white);
 }
 
+/* Questions */
+.questions{
+  margin: 2.5px 0;
+}
+.question__title{
+  color: var(--text-gray);
+  font-weight: 500;
+}
+.question__options{
+  display: flex;
+  justify-content: start;
+  gap: 60px;
+  margin: 10px 0;
+}
+.question__label{
+  display: flex;
+  gap:5px;
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 

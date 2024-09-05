@@ -6,15 +6,43 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
-  const [remarks, setRemarks] = useState('');
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const questions = [
+    { label: 'Body Damage', key: 'bodyDamagePojo' },
+    { label: 'Glasses Damage', key: 'glassesDamagePojo' },
+    { label: 'Platform Damage', key: 'platformDamagePojo' },
+    { label: 'Seat Assembly Damage', key: 'seatAssyDamagePojo' },
+    { label: 'Seat Cushion Damage', key: 'seatCushionDamagePojo' },
+    { label: 'Roof Leakage', key: 'roofLeakPojo' },
+    { label: 'Inside Cleaning', key: 'insideCleaningPojo' },
+    { label: 'Outside Cleaning', key: 'outsideCleaningPojo' },
+    { label: 'Missing Property', key: 'missingPropertyPojo' }
+  ];
+
+  const [formData, setFormData] = useState({
+    bodyDamagePojo: '',
+    glassesDamagePojo: '',
+    platformDamagePojo: '',
+    seatAssyDamagePojo: '',
+    seatCushionDamagePojo: '',
+    roofLeakPojo: '',
+    insideCleaningPojo: '',
+    outsideCleaningPojo: '',
+    missingPropertyPojo: '',
+    remarks: ''
+  });
   const [loading, setLoading] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setRemarks(value);
-    setIsSubmitDisabled(value.length <= 5);
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    if (name === 'remarks') {
+      setIsSubmitDisabled(value.length <= 5);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -22,10 +50,10 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     setLoading(true);
     try {
       const response = await axios.post(`${CONFIG.URL}/admins/securityForm`, {
+        ...formData,
         staffNumberFormPojo: userInfo.staffNumber,
         staffNameFormPojo: userInfo.staffName,
         vehicleFleetNumberFormPojo: fleetNumber,
-        additionalInfoFormPojo: remarks,
         latitude: userLocation.lat,
         longitude: userLocation.lon
       }, {
@@ -34,6 +62,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
           'Content-Type': 'application/json'
         }
       });
+
       if (response.data) {
         toast.success('Form successfully submitted', {
           position: "top-center",
@@ -66,8 +95,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         draggable: true,
         progress: undefined,
       });
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -76,20 +104,52 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     <div className='container-fluid remark-container'>
       <h3 className='form-title'>Security Form</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
+        {questions.map((question, index) => (
+          <div className='questions' key={index}>
+            <p className='question__title'>{question.label}</p>
+            <div className='question__options'>
+              <label className='question__label'>
+                <input
+                  type="radio"
+                  name={question.key}
+                  value="yes"
+                  onChange={handleInputChange}
+                  checked={formData[question.key] === 'yes'}
+                  className='question__option'
+                />
+                <span>Yes</span>
+              </label>
+              <label className='question__label'>
+                <input
+                  type="radio"
+                  name={question.key}
+                  value="no"
+                  onChange={handleInputChange}
+                  checked={formData[question.key] === 'no'}
+                  className='question__option'
+                />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+        ))}
+
         <label htmlFor='remarks' className='form-label'>Remarks</label>
         <textarea
           name="remarks"
           id="remarks"
           className='form-textarea'
           placeholder='Enter your comments'
-          value={remarks}
+          value={formData.remarks}
           onChange={handleInputChange}
         ></textarea>
         <small className='info-text'>*required to be filled</small>
-        <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
+        <button type="submit" className='form-btn' disabled={isSubmitDisabled}>
+          Submit
+        </button>
       </form>
       <Loader loading={loading} />
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };
