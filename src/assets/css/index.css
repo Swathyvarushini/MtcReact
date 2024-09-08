@@ -324,6 +324,7 @@ button {
 }
 
 .form-btn {
+  width: 100%;
   grid-row: 4;
   padding: 10px 20px;
   font-size: 16px;
