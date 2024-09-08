@@ -30,7 +30,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     outsideCleaningPojo: '',
     missingPropertyPojo: '',
   });
-
+  const [remarks, setRemarks] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
@@ -42,6 +42,8 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
       ...formData,
       [name]: value
     });
+    setRemarks(value);
+    setIsSubmitDisabled(value.length <= 5);
 
     // Enable the submit button when all questions and remarks are filled
     validateForm({
@@ -53,8 +55,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   // Handle form validation
   const validateForm = (updatedFormData) => {
     const allQuestionsAnswered = Object.keys(updatedFormData).slice(0, 9).every(key => updatedFormData[key]);
-    const remarksValid = updatedFormData.remarks.length > 5;
-    setIsSubmitDisabled(!(allQuestionsAnswered && remarksValid));
+    setIsSubmitDisabled(!(allQuestionsAnswered));
   };
 
   // Handle form submit
