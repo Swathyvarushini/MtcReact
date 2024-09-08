@@ -54,7 +54,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const handleRemarksChange = (e) => {
     const value = e.target.value;
     setRemarks(value);
-
     // Validate form for submission
     validateForm(formData, value);
   };
