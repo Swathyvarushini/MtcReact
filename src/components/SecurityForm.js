@@ -29,7 +29,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     insideCleaningPojo: '',
     outsideCleaningPojo: '',
     missingPropertyPojo: '',
-    remarks: ''
   });
 
   const [loading, setLoading] = useState(false);
@@ -63,11 +62,12 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${CONFIG.URL}/admins/securityForm`, {
+      const response = await axios.post(`${CONFIG.URL}/inspection/securitySave`, {
         ...formData,
-        staffNumberFormPojo: userInfo.staffNumber,
-        staffNameFormPojo: userInfo.staffName,
-        vehicleFleetNumberFormPojo: fleetNumber,
+        staffNumberBasePojo: userInfo.staffNumber,
+        staffNameBasePojo: userInfo.staffName,
+        fleetNumberBasePojo: fleetNumber,
+        additionalInfoBasePojo: remarks,
         latitude: userLocation.lat,
         longitude: userLocation.lon
       }, {
@@ -158,7 +158,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
             id="remarks"
             className='form-textarea'
             placeholder='Enter your comments (minimum 5 characters)'
-            value={formData.remarks}
+            value={remarks}
             onChange={handleInputChange}
           ></textarea>
           <small className='info-text'>*required to be filled</small>

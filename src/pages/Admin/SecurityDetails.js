@@ -4,25 +4,25 @@ import Loader from '../../components/Loader';
 import CONFIG from '../../Config';
 
 const SecurityDetails = () => {
-    const [inspectionData, setInspectionData] = useState([]);
+    const [securityData, setSecurityData] = useState([]);
     const [loading, setLoading] = useState(false); 
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCriteria, setFilterCriteria] = useState({ startDate: '', endDate: '' });
 
     useEffect(() => {
-        const fetchInspectionData = async () => {
+        const fetchsecurityData = async () => {
             setLoading(true);
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {
+                const response = await axios.get(`${CONFIG.URL}/inspection/securityRead`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     },
                 });
                 if (response.data) {
-                    setInspectionData(response.data);
+                    setSecurityData(response.data);
                     setFilteredData(response.data.reverse());
                 }
             } catch (error) {
@@ -34,14 +34,14 @@ const SecurityDetails = () => {
             }
         };
 
-        fetchInspectionData();
+        fetchsecurityData();
     }, []);
 
     useEffect(() => {
-        const filtered = inspectionData.filter((data) => {
+        const filtered = securityData.filter((data) => {
             const matchesSearchTerm =
-                data.vehicleFleetNumberFormPojo.includes(searchTerm) ||
-                data.staffNumberFormPojo.includes(searchTerm);
+                data. fleetNumberBasePojo.includes(searchTerm) ||
+                data. staffNumberBasePojo.includes(searchTerm);
 
             const startDate = filterCriteria.startDate ? new Date(filterCriteria.startDate).setHours(0, 0, 0, 0) : null;
             const endDate = filterCriteria.endDate ? new Date(filterCriteria.endDate).setHours(23, 59, 59, 999) : null;
@@ -55,7 +55,7 @@ const SecurityDetails = () => {
         });
 
         setFilteredData(filtered);
-    }, [searchTerm, filterCriteria, inspectionData]);
+    }, [searchTerm, filterCriteria, securityData]);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -71,10 +71,10 @@ const SecurityDetails = () => {
             ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Comments', 'Date.of.Submission'],
             ...filteredData.map((data, index) => [
                 index + 1,
-                data.vehicleFleetNumberFormPojo,
-                data.staffNumberFormPojo,
-                data.staffNameFormPojo || 'NA',
-                data.additionalInfoFormPojo,
+                data. fleetNumberBasePojo,
+                data. staffNumberBasePojo,
+                data. staffNameBasePojo || 'NA',
+                data. additionalInfoBasePojo,
                 data.dateAndTimeOfSubmission,
                 // data.staffLocationPojo
             ]),
@@ -152,10 +152,10 @@ const SecurityDetails = () => {
                             filteredData.map((data, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{data.vehicleFleetNumberFormPojo}</td>
-                                    <td>{data.staffNumberFormPojo}</td>
-                                    <td>{data.staffNameFormPojo || 'NA'}</td>
-                                    <td>{data.additionalInfoFormPojo}</td>
+                                    <td>{data. fleetNumberBasePojo}</td>
+                                    <td>{data. staffNumberBasePojo}</td>
+                                    <td>{data. staffNameBasePojo || 'NA'}</td>
+                                    <td>{data. additionalInfoBasePojo}</td>
                                     <td>{data.dateAndTimeOfSubmission}</td>
                                     {/* <td><a href={data.staffLocationPojo} target="_blank" rel="noopener noreferrer">Click Here</a></td> */}
                                 </tr>

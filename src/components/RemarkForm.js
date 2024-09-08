@@ -22,10 +22,10 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     setLoading(true);
     try {
       const response = await axios.post(`${CONFIG.URL}/admins/regForm`, {
-        staffNumberFormPojo: userInfo.staffNumber,
-        staffNameFormPojo: userInfo.staffName,
-        vehicleFleetNumberFormPojo: fleetNumber,
-        additionalInfoFormPojo: remarks,
+        staffNumberBasePojo: userInfo.staffNumber,
+        staffNameBasePojo: userInfo.staffName,
+        fleetNumberBasePojo: fleetNumber,
+        additionalInfoBasePojo: remarks,
         latitude: userLocation.lat,
         longitude: userLocation.lon
       }, {
