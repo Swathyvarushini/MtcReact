@@ -165,9 +165,6 @@ const SecurityDetails = () => {
                                     <td>{data. staffNumberBasePojo}</td>
                                     <td>{data. staffNameBasePojo || 'NA'}</td>
                                     <td>{data. bodyDamagePojo || 'NA'}</td>
-                                    <td>{data. Pojo || 'NA'}</td>
-                                    <td>{data. staffNameBasePojo || 'NA'}</td>
-                                    <td>{data. bodyDamagePojo || 'NA'}</td>
                                     <td>{data.glassesDamagePojo || 'NA'}</td>
                                     <td>{data.platformDamagePojo || 'NA'}</td>
                                     <td>{data.seatAssyDamagePojo || 'NA'}</td>
@@ -177,7 +174,7 @@ const SecurityDetails = () => {
                                     <td>{data.outsideCleaningPojo || 'NA'}</td>
                                     <td>{data.missingPropertyPojo || 'NA'}</td>
                                     <td>{data.additionalInfoBasePojo || 'NA'}</td>
-                                    <td>{data.dateAndTimeOfSubmission}</td>
+                                    <td>{data.dateAndTimeBasePojo}</td>
                                     {/* <td><a href={data.staffLocationPojo} target="_blank" rel="noopener noreferrer">Click Here</a></td> */}
                                 </tr>
                             ))
