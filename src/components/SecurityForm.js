@@ -42,20 +42,28 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
       ...formData,
       [name]: value
     });
-    setRemarks(value);
-    setIsSubmitDisabled(value.length <= 5);
 
-    // Enable the submit button when all questions and remarks are filled
+    // Validate form for submission
     validateForm({
       ...formData,
       [name]: value
     });
   };
 
+  // Handle remarks input change
+  const handleRemarksChange = (e) => {
+    const value = e.target.value;
+    setRemarks(value);
+
+    // Validate form for submission
+    validateForm(formData, value);
+  };
+
   // Handle form validation
-  const validateForm = (updatedFormData) => {
+  const validateForm = (updatedFormData, updatedRemarks = remarks) => {
     const allQuestionsAnswered = Object.keys(updatedFormData).slice(0, 9).every(key => updatedFormData[key]);
-    setIsSubmitDisabled(!(allQuestionsAnswered));
+    const remarksValid = updatedRemarks.length > 5;
+    setIsSubmitDisabled(!(allQuestionsAnswered && remarksValid));
   };
 
   // Handle form submit
@@ -160,11 +168,10 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
             className='form-textarea'
             placeholder='Enter your comments (minimum 5 characters)'
             value={remarks}
-            onChange={handleInputChange}
+            onChange={handleRemarksChange}
           ></textarea>
           <small className='info-text'>*required to be filled</small>
         </div>
-
 
         {/* Submit Button */}
         <div className='form-btn__container'>

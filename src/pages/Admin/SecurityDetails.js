@@ -68,14 +68,14 @@ const SecurityDetails = () => {
 
     const downloadCSV = () => {
         const csvRows = [
-            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Comments', 'Date.of.Submission'],
+            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Body Damage','Glass Damage','Platform Damage','Seat Assembly Damage','Seat Cushion Damage','Roof Leak','Inside Cleaning','Outside Cleaning','Missing Property', 'Comments', 'Date.of.Submission'],
             ...filteredData.map((data, index) => [
                 index + 1,
                 data. fleetNumberBasePojo,
                 data. staffNumberBasePojo,
                 data. staffNameBasePojo || 'NA',
                 data. additionalInfoBasePojo,
-                data.dateAndTimeOfSubmission,
+                data.dateAndTimeBasePojo,
                 // data.staffLocationPojo
             ]),
         ];
@@ -142,6 +142,15 @@ const SecurityDetails = () => {
                             <th>Fleet.No</th>
                             <th>Staff.No</th>
                             <th>Name</th>
+                            <th>Body Damage</th>
+                            <th>Glass Damage</th>
+                            <th>Platform Damage</th>
+                            <th>Seat Assembly Damage</th>
+                            <th>Seat Cushion Damage</th>
+                            <th>Roof Leak</th>
+                            <th>Inside Cleaning</th>
+                            <th>Outside Cleaning</th>
+                            <th>Missing Property</th>
                             <th>Comments</th>
                             <th>Date.of.Submission</th>
                             {/* <th>Location</th> */}
@@ -155,14 +164,26 @@ const SecurityDetails = () => {
                                     <td>{data. fleetNumberBasePojo}</td>
                                     <td>{data. staffNumberBasePojo}</td>
                                     <td>{data. staffNameBasePojo || 'NA'}</td>
-                                    <td>{data. additionalInfoBasePojo}</td>
+                                    <td>{data. bodyDamagePojo || 'NA'}</td>
+                                    <td>{data. Pojo || 'NA'}</td>
+                                    <td>{data. staffNameBasePojo || 'NA'}</td>
+                                    <td>{data. bodyDamagePojo || 'NA'}</td>
+                                    <td>{data.glassesDamagePojo || 'NA'}</td>
+                                    <td>{data.platformDamagePojo || 'NA'}</td>
+                                    <td>{data.seatAssyDamagePojo || 'NA'}</td>
+                                    <td>{data.seatCushionDamagePojo || 'NA'}</td>
+                                    <td>{data.roofLeakPojo || 'NA'}</td>
+                                    <td>{data.insideCleaningPojo || 'NA'}</td>
+                                    <td>{data.outsideCleaningPojo || 'NA'}</td>
+                                    <td>{data.missingPropertyPojo || 'NA'}</td>
+                                    <td>{data.additionalInfoBasePojo || 'NA'}</td>
                                     <td>{data.dateAndTimeOfSubmission}</td>
                                     {/* <td><a href={data.staffLocationPojo} target="_blank" rel="noopener noreferrer">Click Here</a></td> */}
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="6">No data available</td>
+                                <td colSpan="18">No data available</td>
                             </tr>
                         )}
                     </tbody>
