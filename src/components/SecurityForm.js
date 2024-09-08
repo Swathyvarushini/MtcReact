@@ -18,6 +18,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     { label: 'Missing Property', key: 'missingPropertyPojo' }
   ];
 
+  // Initialize form data state
   const [formData, setFormData] = useState({
     bodyDamagePojo: '',
     glassesDamagePojo: '',
@@ -35,17 +36,29 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
+  // Handle radio input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value
     });
-    if (name === 'remarks') {
-      setIsSubmitDisabled(value.length <= 5);
-    }
+
+    // Enable the submit button when all questions and remarks are filled
+    validateForm({
+      ...formData,
+      [name]: value
+    });
   };
 
+  // Handle form validation
+  const validateForm = (updatedFormData) => {
+    const allQuestionsAnswered = Object.keys(updatedFormData).slice(0, 9).every(key => updatedFormData[key]);
+    const remarksValid = updatedFormData.remarks.length > 5;
+    setIsSubmitDisabled(!(allQuestionsAnswered && remarksValid));
+  };
+
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -103,8 +116,10 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
 
   return (
     <div className='container-fluid remark-container'>
-      <h3 className='form-title'>Security Form</h3>
+      <h3 className='form-title'>Security Form Details</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
+
+        {/* Displaying all questions with radio buttons */}
         {questions.map((question, index) => (
           <div className='questions' key={index}>
             <p className='question__title'>{question.label}</p>
@@ -134,20 +149,29 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
             </div>
           </div>
         ))}
-        <label htmlFor='remarks' className='form-label'>Remarks</label>
-        <textarea
-          name="remarks"
-          id="remarks"
-          className='form-textarea'
-          placeholder='Enter your comments'
-          value={formData.remarks}
-          onChange={handleInputChange}
-        ></textarea>
-        <small className='info-text'>*required to be filled</small>
 
-        <button type="submit" className='form-btn' disabled={isSubmitDisabled}>
-          Submit
-        </button>
+        {/* Remarks Textarea */}
+        <div>
+          <label htmlFor='remarks' className='form-label'>Remarks</label>
+          <textarea
+            name="remarks"
+            id="remarks"
+            className='form-textarea'
+            placeholder='Enter your comments (minimum 5 characters)'
+            value={formData.remarks}
+            onChange={handleInputChange}
+          ></textarea>
+          <small className='info-text'>*required to be filled</small>
+        </div>
+
+
+        {/* Submit Button */}
+        <div className='form-btn__container'>
+          <button type="submit" className='form-btn' disabled={isSubmitDisabled}>
+            Submit
+          </button>
+        </div>
+
       </form>
       <Loader loading={loading} />
       <ToastContainer />
