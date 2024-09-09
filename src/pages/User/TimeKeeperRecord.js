@@ -99,7 +99,7 @@ const TimeKeeperRecord = () => {
               );
             })
           ) : (
-            <p>No records found for the selected date</p>
+            <p>No time keeper records found</p>
           )
         )}
       </div>

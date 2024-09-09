@@ -99,7 +99,7 @@ const InspectionRecord = () => {
               );
             })
           ) : (
-            <p>No records found for the selected date</p>
+            <p>No inspection records found</p>
           )
         )}
       </div>
