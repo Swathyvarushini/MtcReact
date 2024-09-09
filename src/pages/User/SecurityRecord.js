@@ -3,7 +3,7 @@ import axios from 'axios';
 import CONFIG from '../../Config';
 import Loader from '../../components/Loader';
 
-const Record = () => {
+const SecurityRecord = () => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
@@ -24,7 +24,7 @@ const Record = () => {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {
+        const response = await axios.get(`${CONFIG.URL}/inspection/securityRead`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const Record = () => {
 
   return (
     <div className="record-container">
-      <h3 className="record-title">Inspection Records</h3>
+      <h3 className="record-title">Security Records</h3>
 
       <div className="date-input-container">
         <input
@@ -90,8 +90,17 @@ const Record = () => {
               return (
                 <div key={index} className="record-card">
                   <div className="card-body">
-                    <p><strong>Fleet No:</strong> {record.vehicleFleetNumberFormPojo}</p>
-                    <p><strong>Comments:</strong> {record.additionalInfoFormPojo}</p>
+                    <p><strong>Fleet No:</strong> {record.fleetNumberBasePojo}</p>
+                    <p><strong>Body Damage:</strong> {record.bodyDamagePojo}</p>
+                    <p><strong>Glass Damage:</strong> {record.glassesDamagePojo}</p>
+                    <p><strong>Platform Damage:</strong> {record.platformDamagePojo}</p>
+                    <p><strong>Seat Assymbly Damage:</strong> {record.seatAssyDamagePojo}</p>
+                    <p><strong>Seat Cushion Damage:</strong> {record.seatCushionDamagePojo}</p>
+                    <p><strong>Roof Leak:</strong> {record.roofLeakPojo}</p>
+                    <p><strong>Inside Cleaning:</strong> {record.insideCleaningPojo}</p>
+                    <p><strong>Outside Cleaning:</strong> {record.outsideCleaningPojo}</p>
+                    <p><strong>Missing Property:</strong> {record.missingPropertyPojo}</p>
+                    <p><strong>Comments:</strong> {record.additionalInfoBasePojo}</p>
                     <p><strong>Date of Submission:</strong> {formattedDate}</p>
                     <p><strong>Time of Submission:</strong> {formattedTime}</p>
                   </div>
@@ -108,4 +117,4 @@ const Record = () => {
   );
 };
 
-export default Record;
+export default SecurityRecord;
