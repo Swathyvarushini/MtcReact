@@ -206,9 +206,11 @@ button {
 /* Scanner */
 .scanner {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100vh;
 }
 
 .scanner__desc {
@@ -239,11 +241,11 @@ button {
 }
 
 .video-scanner {
-  width: 340px;
-    height: 250px;
-    max-width: 1000px;
-    max-height: 600px;
-    display: block;
+  width: 600px;
+  height: 250px;
+  max-width: 1000px;
+  max-height: 600px;
+  display: block;
 }
 
 .hidden {
@@ -354,6 +356,8 @@ button {
 }
 
 .navbar {
+    position: sticky;
+      top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -670,7 +674,6 @@ h2 {
 .date-input-container {
   flex: 1;
   min-width: 150px;
-  z-index: -1;
 }
 
 .date-input {
@@ -920,22 +923,25 @@ h2 {
 }
 
 /* Questions */
-.questions{
+.questions {
   margin: 2.5px 0;
 }
-.question__title{
+
+.question__title {
   color: var(--text-gray);
   font-weight: 500;
 }
-.question__options{
+
+.question__options {
   display: flex;
   justify-content: start;
   gap: 60px;
   margin: 10px 0;
 }
-.question__label{
+
+.question__label {
   display: flex;
-  gap:5px;
+  gap: 5px;
 }
 
 /* Media Queries for Responsive Design */
@@ -1036,6 +1042,7 @@ h2 {
 
   .navbar {
     padding: 0.5rem 1rem;
+    z-index: 2;
   }
 
   .logo-image {
@@ -1051,6 +1058,7 @@ h2 {
   /* Admin Navbar */
   .navbar {
     padding: 1rem;
+    z-index: 2;
   }
 
   .nav-links {
@@ -1117,7 +1125,8 @@ h2 {
     padding: 0.75rem 0.5rem;
     font-size: 0.875rem;
   }
-  .form-btn__container{
+
+  .form-btn__container {
     width: 100%;
   }
 
