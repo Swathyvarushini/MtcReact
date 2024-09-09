@@ -32,7 +32,7 @@ const SecurityRecord = () => {
         });
 
         if (response.data && Array.isArray(response.data)) {
-          const filteredRecords = response.data.filter(record => record.staffNumberFormPojo === staffNumber);
+          const filteredRecords = response.data.filter(record => record.staffNumberBasePojo === staffNumber);
           setRecords(filteredRecords.reverse());
         } else {
           console.error('No valid records found');
@@ -58,7 +58,7 @@ const SecurityRecord = () => {
 
   const filteredRecords = selectedDate
     ? records.filter(record => {
-      const recordDate = new Date(record.dateAndTimeOfSubmission).toISOString().split('T')[0];
+      const recordDate = new Date(record.dateAndTimeBasePojo).toISOString().split('T')[0];
       return recordDate === selectedDate;
     })
     : records;
@@ -83,7 +83,7 @@ const SecurityRecord = () => {
         ) : (
           filteredRecords.length > 0 ? (
             filteredRecords.map((record, index) => {
-              const recordDateTime = new Date(record.dateAndTimeOfSubmission);
+              const recordDateTime = new Date(record.dateAndTimeBasePojo);
               const formattedDate = recordDateTime.toLocaleDateString(); 
               const formattedTime = recordDateTime.toLocaleTimeString(); 
 
@@ -108,7 +108,7 @@ const SecurityRecord = () => {
               );
             })
           ) : (
-            <p>No records found for the selected date</p>
+            <p>No security records found</p>
           )
         )}
       </div>
