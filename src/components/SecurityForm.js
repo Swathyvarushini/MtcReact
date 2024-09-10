@@ -18,7 +18,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     { label: 'Missing Property', key: 'missingPropertyPojo' }
   ];
 
-  // Initialize form data state
   const [formData, setFormData] = useState({
     bodyDamagePojo: '',
     glassesDamagePojo: '',
@@ -30,12 +29,12 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     outsideCleaningPojo: '',
     missingPropertyPojo: '',
   });
+
   const [remarks, setRemarks] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
-  // Handle radio input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -43,32 +42,36 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
       [name]: value
     });
 
-    // Validate form for submission
     validateForm({
       ...formData,
       [name]: value
     });
   };
 
-  // Handle remarks input change
   const handleRemarksChange = (e) => {
     const value = e.target.value;
     setRemarks(value);
-    // Validate form for submission
     validateForm(formData, value);
   };
 
-  // Handle form validation
   const validateForm = (updatedFormData, updatedRemarks = remarks) => {
     const allQuestionsAnswered = Object.keys(updatedFormData).slice(0, 9).every(key => updatedFormData[key]);
     const remarksValid = updatedRemarks.length > 5;
     setIsSubmitDisabled(!(allQuestionsAnswered && remarksValid));
   };
 
-  // Handle form submit
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const date = now.toLocaleDateString('en-IN');
+    const time = now.toLocaleTimeString('en-IN', { hour12: false });
+    return `${date} ${time}`;
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
       const response = await axios.post(`${CONFIG.URL}/inspection/securitySave`, {
         ...formData,
@@ -77,7 +80,8 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         fleetNumberBasePojo: fleetNumber,
         additionalInfoBasePojo: remarks,
         latitude: userLocation.lat,
-        longitude: userLocation.lon
+        longitude: userLocation.lon,
+        dateAndTimeBasePojo: getCurrentDateTime()  
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -126,8 +130,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     <div className='container-fluid remark-container'>
       <h3 className='form-title'>Security Form Details</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
-
-        {/* Displaying all questions with radio buttons */}
         {questions.map((question, index) => (
           <div className='questions' key={index}>
             <p className='question__title'>{question.label}</p>
@@ -158,7 +160,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
           </div>
         ))}
 
-        {/* Remarks Textarea */}
         <div>
           <label htmlFor='remarks' className='form-label'>Remarks</label>
           <textarea
@@ -172,13 +173,11 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
           <small className='info-text'>*required to be filled</small>
         </div>
 
-        {/* Submit Button */}
         <div className='form-btn__container'>
           <button type="submit" className='form-btn' disabled={isSubmitDisabled}>
             Submit
           </button>
         </div>
-
       </form>
       <Loader loading={loading} />
       <ToastContainer />
