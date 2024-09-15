@@ -40,7 +40,10 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation, currentDate })
   const navigate = useNavigate();
 
   const getCurrentDateTime = () => {
-    const dateTime = currentDate;
+    const now = new Date();
+    const offset = now.getTimezoneOffset() * 60000; // Offset in milliseconds
+    const dateTime = new Date(now.getTime() - offset).toISOString().slice(0, 19); // "YYYY-MM-DDTHH:mm:ss"
+    console.log(dateTime);
     return dateTime;
   };
 
