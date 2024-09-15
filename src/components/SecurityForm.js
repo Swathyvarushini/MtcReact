@@ -35,6 +35,14 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
+  // Function to get the current date and time in ISO format (without milliseconds)
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const dateTime = now.toISOString().split('.')[0]; // "YYYY-MM-DDTHH:mm:ss"
+    return dateTime;
+  };
+
+  // Input change handler for form inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -48,29 +56,26 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     });
   };
 
+  // Input change handler for the remarks field
   const handleRemarksChange = (e) => {
     const value = e.target.value;
     setRemarks(value);
     validateForm(formData, value);
   };
 
+  // Form validation
   const validateForm = (updatedFormData, updatedRemarks = remarks) => {
-    const allQuestionsAnswered = Object.keys(updatedFormData).slice(0, 9).every(key => updatedFormData[key]);
+    const allQuestionsAnswered = Object.keys(updatedFormData).every(key => updatedFormData[key]);
     const remarksValid = updatedRemarks.length > 5;
     setIsSubmitDisabled(!(allQuestionsAnswered && remarksValid));
   };
 
-  const getCurrentDateTime = () => {
-    const now = new Date();
-    const date = now.toLocaleDateString('en-IN');
-    const time = now.toLocaleTimeString('en-IN', { hour12: false });
-    return `${date} ${time}`;
-  };
-
-
+  // Form submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const dateTime = getCurrentDateTime();
 
     try {
       const response = await axios.post(`${CONFIG.URL}/inspection/securitySave`, {
@@ -81,7 +86,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         additionalInfoBasePojo: remarks,
         latitude: userLocation.lat,
         longitude: userLocation.lon,
-        dateAndTimeBasePojo: getCurrentDateTime()  
+        dateAndTimeBasePojo: dateTime,
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -90,19 +90,19 @@ const SecurityRecord = () => {
               return (
                 <div key={index} className="record-card">
                   <div className="card-body">
-                    <p><strong>Fleet No:</strong> {record.fleetNumberBasePojo}</p>
-                    <p><strong>Body Damage:</strong> {record.bodyDamagePojo}</p>
-                    <p><strong>Glass Damage:</strong> {record.glassesDamagePojo}</p>
-                    <p><strong>Platform Damage:</strong> {record.platformDamagePojo}</p>
-                    <p><strong>Seat Assymbly Damage:</strong> {record.seatAssyDamagePojo}</p>
-                    <p><strong>Seat Cushion Damage:</strong> {record.seatCushionDamagePojo}</p>
-                    <p><strong>Roof Leak:</strong> {record.roofLeakPojo}</p>
-                    <p><strong>Inside Cleaning:</strong> {record.insideCleaningPojo}</p>
-                    <p><strong>Outside Cleaning:</strong> {record.outsideCleaningPojo}</p>
-                    <p><strong>Missing Property:</strong> {record.missingPropertyPojo}</p>
-                    <p><strong>Comments:</strong> {record.additionalInfoBasePojo}</p>
-                    <p><strong>Date of Submission:</strong> {formattedDate}</p>
-                    <p><strong>Time of Submission:</strong> {formattedTime}</p>
+                    <p><span className="record-title">Fleet No:</span> {record.fleetNumberBasePojo}</p>
+                    <p><span className="record-title">Body Damage:</span> {record.bodyDamagePojo}</p>
+                    <p><span className="record-title">Glass Damage:</span> {record.glassesDamagePojo}</p>
+                    <p><span className="record-title">Platform Damage:</span> {record.platformDamagePojo}</p>
+                    <p><span className="record-title">Seat Assymbly Damage:</span> {record.seatAssyDamagePojo}</p>
+                    <p><span className="record-title">Seat Cushion Damage:</span> {record.seatCushionDamagePojo}</p>
+                    <p><span className="record-title">Roof Leak:</span> {record.roofLeakPojo}</p>
+                    <p><span className="record-title">Inside Cleaning:</span> {record.insideCleaningPojo}</p>
+                    <p><span className="record-title">Outside Cleaning:</span> {record.outsideCleaningPojo}</p>
+                    <p><span className="record-title">Missing Property:</span> {record.missingPropertyPojo}</p>
+                    <p><span className="record-title">Comments:</span> {record.additionalInfoBasePojo}</p>
+                    <p><span className="record-title">Date of Submission:</span> {formattedDate}</p>
+                    <p><span className="record-title">Time of Submission:</span> {formattedTime}</p>
                   </div>
                 </div>
               );

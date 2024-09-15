@@ -40,12 +40,12 @@ const InspectionDetails = () => {
     useEffect(() => {
         const filtered = inspectionData.filter((data) => {
             const matchesSearchTerm =
-                data.vehicleFleetNumberFormPojo.includes(searchTerm) ||
-                data.staffNumberFormPojo.includes(searchTerm);
+                data.fleetNumberBasePojo.includes(searchTerm) ||
+                data.staffNumberBasePojo.includes(searchTerm);
 
             const startDate = filterCriteria.startDate ? new Date(filterCriteria.startDate).setHours(0, 0, 0, 0) : null;
             const endDate = filterCriteria.endDate ? new Date(filterCriteria.endDate).setHours(23, 59, 59, 999) : null;
-            const submissionDate = new Date(data.dateAndTimeOfSubmission);
+            const submissionDate = new Date(data.dateAndTimeBasePojo);
 
             const withinDateRange =
                 (!startDate || submissionDate >= startDate) &&
@@ -68,14 +68,25 @@ const InspectionDetails = () => {
 
     const downloadCSV = () => {
         const csvRows = [
-            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Comments', 'Date.of.Submission'],
+            ['S.No', 'Fleet.No', 'Staff.No', 'Name','Platform','Wheel Arch','Seat Cushion', 'Seat Assymbly', 'Seat Handle', 'Top Light Wire', 'Foot Board (Front)', 'Foot Board (Rear)', 'Roof Leak', 'PV Glass', 'Sliding Glass', 'Comments', 'Date.of.Submission'],
             ...filteredData.map((data, index) => [
                 index + 1,
-                data.vehicleFleetNumberFormPojo,
-                data.staffNumberFormPojo,
-                data.staffNameFormPojo || 'NA',
-                data.additionalInfoFormPojo,
-                data.dateAndTimeOfSubmission,
+                data.fleetNumberBasePojo,
+                data.staffNumberBasePojo,
+                data.staffNameBasePojo || 'NA',
+                data.platformPojo,
+                data.wheelArchPojo,
+                data.seatCushionPojo,
+                data.seatAssyPojo,
+                data.seatHandlePojo,
+                data.topLightWirePojo,
+                data.footBoardFrontPojo,
+                data.footBoardRearPojo,
+                data.roofLeakPojo,
+                data.pvGlassPojo,
+                data.slidingGlassPojo,
+                data.additionalInfoBasePojo,
+                data.dateAndTimeBasePojo,
                 // data.staffLocationPojo
             ]),
         ];
@@ -142,6 +153,17 @@ const InspectionDetails = () => {
                             <th>Fleet.No</th>
                             <th>Staff.No</th>
                             <th>Name</th>
+                            <th>Platform</th>
+                            <th>Wheel Arch</th>
+                            <th>Seat Cushion</th>
+                            <th>Seat Assymbly</th>
+                            <th>Seat Handle</th>
+                            <th>Top Light Wire</th>
+                            <th>Foot Board (Front)</th>
+                            <th>Foot Board (Rear)</th>
+                            <th>Roof Leak</th>
+                            <th>PV Glass</th>
+                            <th>Sliding Glass</th>
                             <th>Comments</th>
                             <th>Date.of.Submission</th>
                             {/* <th>Location</th> */}
@@ -152,11 +174,22 @@ const InspectionDetails = () => {
                             filteredData.map((data, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{data.vehicleFleetNumberFormPojo}</td>
-                                    <td>{data.staffNumberFormPojo}</td>
-                                    <td>{data.staffNameFormPojo || 'NA'}</td>
-                                    <td>{data.additionalInfoFormPojo}</td>
-                                    <td>{data.dateAndTimeOfSubmission}</td>
+                                    <td>{data.fleetNumberBasePojo}</td>
+                                    <td>{data.staffNumberBasePojo}</td>
+                                    <td>{data.staffNameBasePojo || 'NA'}</td>
+                                    <td>{data.platformPojo || 'NA'}</td>
+                                    <td>{data.wheelArchPojo || 'NA'}</td>
+                                    <td>{data.seatCushionPojo || 'NA'}</td>
+                                    <td>{data.seatAssyPojo || 'NA'}</td>
+                                    <td>{data.seatHandlePojo || 'NA'}</td>
+                                    <td>{data.topLightWirePojo || 'NA'}</td>
+                                    <td>{data.footBoardFrontPojo || 'NA'}</td>
+                                    <td>{data.footBoardRearPojo || 'NA'}</td>
+                                    <td>{data.roofLeakPojo || 'NA'}</td>
+                                    <td>{data.pvGlassPojo || 'NA'}</td>
+                                    <td>{data.slidingGlassPojo || 'NA'}</td>
+                                    <td>{data.additionalInfoBasePojo}</td>
+                                    <td>{data.dateAndTimeBasePojo}</td>
                                     {/* <td><a href={data.staffLocationPojo} target="_blank" rel="noopener noreferrer">Click Here</a></td> */}
                                 </tr>
                             ))
