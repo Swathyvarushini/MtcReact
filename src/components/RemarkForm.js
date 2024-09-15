@@ -5,7 +5,7 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
+const RemarkForm = ({ userInfo, fleetNumber, token, userLocation, currentDate }) => {
   const questions = [
     { label: 'Platform Damage', key: 'platformPojo' },
     { label: 'Wheel Arch Damage', key: 'wheelArchPojo' },
@@ -40,8 +40,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const navigate = useNavigate();
 
   const getCurrentDateTime = () => {
-    const now = new Date();
-    const dateTime = now.toISOString().split('.')[0]; 
+    const dateTime = currentDate;
     return dateTime;
   };
 
@@ -76,7 +75,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
     const dateTime = getCurrentDateTime();
 
     try {
-      const response = await axios.post(`${CONFIG.URL}/admins/regForm`, {
+      const response = await axios.post(`${CONFIG.URL}/inspection/supervisor/saveRecord`, {
         ...formData,
         staffNumberBasePojo: userInfo.staffNumber,
         staffNameBasePojo: userInfo.staffName,
