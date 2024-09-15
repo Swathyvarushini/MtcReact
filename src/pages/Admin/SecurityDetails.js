@@ -45,7 +45,7 @@ const SecurityDetails = () => {
 
             const startDate = filterCriteria.startDate ? new Date(filterCriteria.startDate).setHours(0, 0, 0, 0) : null;
             const endDate = filterCriteria.endDate ? new Date(filterCriteria.endDate).setHours(23, 59, 59, 999) : null;
-            const submissionDate = new Date(data.dateAndTimeOfSubmission);
+            const submissionDate = new Date(data.dateAndTimeBasePojo);
 
             const withinDateRange =
                 (!startDate || submissionDate >= startDate) &&
@@ -74,6 +74,15 @@ const SecurityDetails = () => {
                 data. fleetNumberBasePojo,
                 data. staffNumberBasePojo,
                 data. staffNameBasePojo || 'NA',
+                data. bodyDamagePojo,
+                data. glassesDamagePojo,
+                data. platformDamagePojo,
+                data. seatAssyDamagePojo,
+                data. seatCushionDamagePojo,
+                data. roofLeakPojo,
+                data. insideCleaningPojo,
+                data. outsideCleaningPojo,
+                data. missingPropertyPojo,
                 data. additionalInfoBasePojo,
                 data.dateAndTimeBasePojo,
                 // data.staffLocationPojo

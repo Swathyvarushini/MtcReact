@@ -19,11 +19,13 @@ import TimeKeeperDetails from "./pages/Admin/TimeKeeperDetails";
 import InspectionRecord from "./pages/User/InspectionRecord";
 import SecurityRecord from "./pages/User/SecurityRecord";
 import TimeKeeperRecord from "./pages/User/TimeKeeperRecord";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
+      <ScrollToTop/>
         <AppRoutes />
       </BrowserRouter>
     </Provider>

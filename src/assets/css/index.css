@@ -944,6 +944,11 @@ h2 {
   gap: 5px;
 }
 
+.record-title{
+  font-weight: 500;
+  color: var(--black);
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 

@@ -6,34 +6,92 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
+  const questions = [
+    { label: 'Platform Damage', key: 'platformPojo' },
+    { label: 'Wheel Arch Damage', key: 'wheelArchPojo' },
+    { label: 'Seat Cushion Damage', key: 'seatCushionPojo' },
+    { label: 'Seat Assembly Damage', key: 'seatAssyPojo' },
+    { label: 'Seat Handle Damage', key: 'seatHandlePojo' },
+    { label: 'Top Light Wire Damage', key: 'topLightWirePojo' },
+    { label: 'Foot Board Front Damage', key: 'footBoardFrontPojo' },
+    { label: 'Foot Board Rear Damage', key: 'footBoardRearPojo' },
+    { label: 'Roof Leak', key: 'roofLeakPojo' },
+    { label: 'PV Glass Damage', key: 'pvGlassPojo' },
+    { label: 'Sliding Glass Damage', key: 'slidingGlassPojo' }
+  ];
+
+  const [formData, setFormData] = useState({
+    platformPojo: '',
+    wheelArchPojo: '',
+    seatCushionPojo: '',
+    seatAssyPojo: '',
+    seatHandlePojo: '',
+    topLightWirePojo: '',
+    footBoardFrontPojo: '',
+    footBoardRearPojo: '',
+    roofLeakPojo: '',
+    pvGlassPojo: '',
+    slidingGlassPojo: '',
+  });
+
   const [remarks, setRemarks] = useState('');
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setRemarks(value);
-    setIsSubmitDisabled(value.length <= 5);
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const dateTime = now.toISOString().split('.')[0]; 
+    return dateTime;
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+
+    validateForm({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleRemarksChange = (e) => {
+    const value = e.target.value;
+    setRemarks(value);
+    validateForm(formData, value);
+  };
+
+  const validateForm = (updatedFormData, updatedRemarks = remarks) => {
+    const allQuestionsAnswered = Object.keys(updatedFormData).every(key => updatedFormData[key]);
+    const remarksValid = updatedRemarks.length > 5;
+    setIsSubmitDisabled(!(allQuestionsAnswered && remarksValid));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const dateTime = getCurrentDateTime();
+
     try {
       const response = await axios.post(`${CONFIG.URL}/admins/regForm`, {
+        ...formData,
         staffNumberBasePojo: userInfo.staffNumber,
         staffNameBasePojo: userInfo.staffName,
         fleetNumberBasePojo: fleetNumber,
         additionalInfoBasePojo: remarks,
         latitude: userLocation.lat,
-        longitude: userLocation.lon
+        longitude: userLocation.lon,
+        dateAndTimeBasePojo: dateTime,
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
+
       if (response.data) {
         toast.success('Form successfully submitted', {
           position: "top-center",
@@ -66,30 +124,66 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         draggable: true,
         progress: undefined,
       });
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
 
   return (
     <div className='container-fluid remark-container'>
-      <h3 className='form-title'>Inspection Form</h3>
+      <h3 className='form-title'>Inspection Form Details</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
-        <label htmlFor='remarks' className='form-label'>Remarks</label>
-        <textarea
-          name="remarks"
-          id="remarks"
-          className='form-textarea'
-          placeholder='Enter your comments'
-          value={remarks}
-          onChange={handleInputChange}
-        ></textarea>
-        <small className='info-text'>*required to be filled</small>
-        <button type="submit" className='form-btn' disabled={isSubmitDisabled}>Submit</button>
+        {questions.map((question, index) => (
+          <div className='questions' key={index}>
+            <p className='question__title'>{question.label}</p>
+            <div className='question__options'>
+              <label className='question__label'>
+                <input
+                  type="radio"
+                  name={question.key}
+                  value="yes"
+                  onChange={handleInputChange}
+                  checked={formData[question.key] === 'yes'}
+                  className='question__option'
+                />
+                <span>Yes</span>
+              </label>
+              <label className='question__label'>
+                <input
+                  type="radio"
+                  name={question.key}
+                  value="no"
+                  onChange={handleInputChange}
+                  checked={formData[question.key] === 'no'}
+                  className='question__option'
+                />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+        ))}
+
+        <div>
+          <label htmlFor='remarks' className='form-label'>Remarks</label>
+          <textarea
+            name="remarks"
+            id="remarks"
+            className='form-textarea'
+            placeholder='Enter your comments (minimum 5 characters)'
+            value={remarks}
+            onChange={handleRemarksChange}
+          ></textarea>
+          <small className='info-text'>*required to be filled</small>
+        </div>
+
+        <div className='form-btn__container'>
+          <button type="submit" className='form-btn' disabled={isSubmitDisabled}>
+            Submit
+          </button>
+        </div>
       </form>
       <Loader loading={loading} />
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

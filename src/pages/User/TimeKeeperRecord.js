@@ -90,10 +90,10 @@ const TimeKeeperRecord = () => {
               return (
                 <div key={index} className="record-card">
                   <div className="card-body">
-                    <p><strong>Fleet No:</strong> {record.vehicleFleetNumberFormPojo}</p>
-                    <p><strong>Comments:</strong> {record.additionalInfoFormPojo}</p>
-                    <p><strong>Date of Submission:</strong> {formattedDate}</p>
-                    <p><strong>Time of Submission:</strong> {formattedTime}</p>
+                    <p><span  className="record-title">Fleet No:</span> {record.vehicleFleetNumberFormPojo}</p>
+                    <p><span  className="record-title">Comments:</span> {record.additionalInfoFormPojo}</p>
+                    <p><span  className="record-title">Date of Submission:</span> {formattedDate}</p>
+                    <p><span  className="record-title">Time of Submission:</span> {formattedTime}</p>
                   </div>
                 </div>
               );
