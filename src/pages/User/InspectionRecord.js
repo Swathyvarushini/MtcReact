@@ -24,7 +24,7 @@ const InspectionRecord = () => {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${CONFIG.URL}/admins/viewForm`, {
+        const response = await axios.get(`${CONFIG.URL}/inspection/supervisor/viewRecord`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
+const SecurityForm = ({ userInfo, fleetNumber, token, userLocation, currentDate }) => {
   const questions = [
     { label: 'Body Damage', key: 'bodyDamagePojo' },
     { label: 'Glasses Damage', key: 'glassesDamagePojo' },
@@ -37,8 +37,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
 
   // Function to get the current date and time in ISO format (without milliseconds)
   const getCurrentDateTime = () => {
-    const now = new Date();
-    const dateTime = now.toISOString().split('.')[0]; // "YYYY-MM-DDTHH:mm:ss"
+    const dateTime = currentDate;
     return dateTime;
   };
 
