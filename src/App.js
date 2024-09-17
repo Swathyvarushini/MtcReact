@@ -20,6 +20,8 @@ import InspectionRecord from "./pages/User/InspectionRecord";
 import SecurityRecord from "./pages/User/SecurityRecord";
 import TimeKeeperRecord from "./pages/User/TimeKeeperRecord";
 import ScrollToTop from "./components/ScrollToTop";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const App = () => {
   return (
