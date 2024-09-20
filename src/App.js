@@ -46,7 +46,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/scanner" element={<ProtectedRoute><Scanner /></ProtectedRoute>} />
-        <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
+        <Route path="/form" element={<Form />} />
         <Route path="/inspection-record" element={<ProtectedRoute><InspectionRecord /></ProtectedRoute>} />
         <Route path="/security-record" element={<ProtectedRoute><SecurityRecord /></ProtectedRoute>} />
         <Route path="/timekeeper-record" element={<ProtectedRoute><TimeKeeperRecord/></ProtectedRoute>} />

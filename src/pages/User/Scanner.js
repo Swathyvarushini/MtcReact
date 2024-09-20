@@ -1,6 +1,7 @@
 import React from 'react'
 import ScannerElement from '../../components/ScannerElement'
 import icon from '../../assets/images/newlogo.png';
+import RemarkForm from '../../components/RemarkForm';
 
 
 export default function Scanner() {
