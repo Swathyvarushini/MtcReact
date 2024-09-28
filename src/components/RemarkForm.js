@@ -81,10 +81,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation, currentDate })
     {
       label: 'PV Glass Damage',
       key: 'pvGlassPojo',
-      options: [
-        { value: 'Yes', label: 'Yes' },
-        { value: 'No', label: 'No' }
-      ]
+      options: Array.from({ length: 11 }, (_, i) => ({ value: i.toString(), label: i.toString() }))
     },
     {
       label: 'Sliding Glass Damage',
