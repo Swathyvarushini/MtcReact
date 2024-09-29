@@ -21,15 +21,19 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   ];
 
   const inOptions = [
-    { value: 'breakdown', label: 'Breakdown' },
-    { value: 'petrolFilling', label: 'Petrol Filling' },
-    { value: 'regularOperation', label: 'Regular Operation' }
+    { value: 'Breakdown', label: 'Breakdown' },
+    { value: 'Fuel Filling', label: 'Fuel Filling' },
+    { value: 'Normal Operation', label: 'Normal Operation' }
   ];
 
   const outOptions = [
-    { value: 'mtcW', label: 'Send to MTC-W' },
-    { value: 'chartedTrip', label: 'Charted Trip' },
-    { value: 'regularOperation', label: 'Regular Operation' }
+    { value: 'FC', label: 'FC' },
+    { value: 'PRD', label: 'PRD' },
+    { value: 'Brake Test', label: 'Brake Test' },
+    { value: 'Charted Trip', label: 'Charted Trip' },
+    { value: 'TVS', label: 'TVS' },
+    { value: 'Special Operation', label: 'Special Operation' },
+    { value: 'Normal Operation', label: 'Normal Operation' }
   ];
 
   const [formData, setFormData] = useState({
