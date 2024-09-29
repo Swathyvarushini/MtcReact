@@ -5,7 +5,7 @@ import CONFIG from '../../Config';
 
 const SecurityDetails = () => {
     const [securityData, setSecurityData] = useState([]);
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCriteria, setFilterCriteria] = useState({ startDate: '', endDate: '' });
@@ -40,8 +40,8 @@ const SecurityDetails = () => {
     useEffect(() => {
         const filtered = securityData.filter((data) => {
             const matchesSearchTerm =
-                data. fleetNumberBasePojo.includes(searchTerm) ||
-                data. staffNumberBasePojo.includes(searchTerm);
+                data.fleetNumberBasePojo.includes(searchTerm) ||
+                data.staffNumberBasePojo.includes(searchTerm);
 
             const startDate = filterCriteria.startDate ? new Date(filterCriteria.startDate).setHours(0, 0, 0, 0) : null;
             const endDate = filterCriteria.endDate ? new Date(filterCriteria.endDate).setHours(23, 59, 59, 999) : null;
@@ -68,22 +68,24 @@ const SecurityDetails = () => {
 
     const downloadCSV = () => {
         const csvRows = [
-            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Body Damage','Glass Damage','Platform Damage','Seat Assembly Damage','Seat Cushion Damage','Roof Leak','Inside Cleaning','Outside Cleaning','Missing Property', 'Comments', 'Date.of.Submission'],
+            ['S.No', 'Fleet.No', 'Staff.No', 'Name', 'Gate Entry', 'Gate Entry Reason', 'Body Damage', 'Glass Damage', 'Platform Damage', 'Seat Assembly Damage', 'Seat Cushion Damage', 'Roof Leak', 'Inside Cleaning', 'Outside Cleaning', 'Missing Property', 'Comments', 'Date.of.Submission'],
             ...filteredData.map((data, index) => [
                 index + 1,
-                data. fleetNumberBasePojo,
-                data. staffNumberBasePojo,
-                data. staffNameBasePojo || 'NA',
-                data. bodyDamagePojo,
-                data. glassesDamagePojo,
-                data. platformDamagePojo,
-                data. seatAssyDamagePojo,
-                data. seatCushionDamagePojo,
-                data. roofLeakPojo,
-                data. insideCleaningPojo,
-                data. outsideCleaningPojo,
-                data. missingPropertyPojo,
-                data. additionalInfoBasePojo,
+                data.fleetNumberBasePojo,
+                data.staffNumberBasePojo,
+                data.staffNameBasePojo || 'NA',
+                data.gateEntryPojo || 'NA',
+                data.gateEntryReasonPojo || 'NA',
+                data.bodyDamagePojo,
+                data.glassesDamagePojo,
+                data.platformDamagePojo,
+                data.seatAssyDamagePojo,
+                data.seatCushionDamagePojo,
+                data.roofLeakPojo,
+                data.insideCleaningPojo,
+                data.outsideCleaningPojo,
+                data.missingPropertyPojo,
+                data.additionalInfoBasePojo,
                 data.dateAndTimeBasePojo,
                 // data.staffLocationPojo
             ]),
@@ -151,6 +153,8 @@ const SecurityDetails = () => {
                             <th>Fleet.No</th>
                             <th>Staff.No</th>
                             <th>Name</th>
+                            <th>Gate Entry</th>
+                            <th>Gate Entry Reason</th>
                             <th>Body Damage</th>
                             <th>Glass Damage</th>
                             <th>Platform Damage</th>
@@ -170,10 +174,12 @@ const SecurityDetails = () => {
                             filteredData.map((data, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{data. fleetNumberBasePojo}</td>
-                                    <td>{data. staffNumberBasePojo}</td>
-                                    <td>{data. staffNameBasePojo || 'NA'}</td>
-                                    <td>{data. bodyDamagePojo || 'NA'}</td>
+                                    <td>{data.fleetNumberBasePojo}</td>
+                                    <td>{data.staffNumberBasePojo}</td>
+                                    <td>{data.staffNameBasePojo || 'NA'}</td>
+                                    <td>{data.gateEntryPojo || 'NA'}</td>
+                                    <td>{data.gateEntryReasonPojo || 'NA'}</td>
+                                    <td>{data.bodyDamagePojo || 'NA'}</td>
                                     <td>{data.glassesDamagePojo || 'NA'}</td>
                                     <td>{data.platformDamagePojo || 'NA'}</td>
                                     <td>{data.seatAssyDamagePojo || 'NA'}</td>

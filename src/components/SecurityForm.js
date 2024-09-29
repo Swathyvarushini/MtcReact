@@ -129,6 +129,7 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
       });
 
       if (response.data) {
+        navigate("/scanner");
         toast.success('Form successfully submitted', {
           position: "top-center",
           autoClose: 3000,
@@ -138,7 +139,6 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
           draggable: true,
           progress: undefined,
         });
-        navigate("/scanner");
       } else {
         toast.error('Form submission failed', {
           position: "top-center",
