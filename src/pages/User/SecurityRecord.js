@@ -91,6 +91,8 @@ const SecurityRecord = () => {
                 <div key={index} className="record-card">
                   <div className="card-body">
                     <p><span className="record-title">Fleet No:</span> {record.fleetNumberBasePojo}</p>
+                    <p><span className="record-title">Gate Entry:</span> {record.gateEntryPojo}</p>
+                    <p><span className="record-title">Gate Entry Reason:</span> {record.gateEntryReasonPojo}</p>
                     <p><span className="record-title">Body Damage:</span> {record.bodyDamagePojo}</p>
                     <p><span className="record-title">Glass Damage:</span> {record.glassesDamagePojo}</p>
                     <p><span className="record-title">Platform Damage:</span> {record.platformDamagePojo}</p>
