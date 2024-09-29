@@ -4,9 +4,11 @@ import CONFIG from '../Config';
 import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select'; // Import react-select for dropdown
 
-const SecurityForm = ({ userInfo, fleetNumber, token, userLocation}) => {
+const SecurityForm = ({ userInfo, fleetNumber, token, userLocation }) => {
   const questions = [
+    { label: 'Gate Entry', key: 'gateEntryPojo' },
     { label: 'Body Damage', key: 'bodyDamagePojo' },
     { label: 'Glasses Damage', key: 'glassesDamagePojo' },
     { label: 'Platform Damage', key: 'platformDamagePojo' },
@@ -18,7 +20,21 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation}) => {
     { label: 'Missing Property', key: 'missingPropertyPojo' }
   ];
 
+  const inOptions = [
+    { value: 'breakdown', label: 'Breakdown' },
+    { value: 'petrolFilling', label: 'Petrol Filling' },
+    { value: 'regularOperation', label: 'Regular Operation' }
+  ];
+
+  const outOptions = [
+    { value: 'mtcW', label: 'Send to MTC-W' },
+    { value: 'chartedTrip', label: 'Charted Trip' },
+    { value: 'regularOperation', label: 'Regular Operation' }
+  ];
+
   const [formData, setFormData] = useState({
+    gateEntryPojo: '',
+    gateEntryReasonPojo: '',
     bodyDamagePojo: '',
     glassesDamagePojo: '',
     platformDamagePojo: '',
@@ -40,11 +56,27 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation}) => {
     const now = new Date();
     const offset = now.getTimezoneOffset() * 60000; // Offset in milliseconds
     const dateTime = new Date(now.getTime() - offset).toISOString().slice(0, 19); // "YYYY-MM-DDTHH:mm:ss"
-    console.log(dateTime);
     return dateTime;
   };
 
-  // Input change handler for form inputs
+  // Handler for gateEntryPojo change
+  const handleGateEntryChange = (e) => {
+    setFormData({
+      ...formData,
+      gateEntryPojo: e.target.value,
+      gateEntryReasonPojo: '' // Reset reason when gate entry is changed
+    });
+  };
+
+  // Handler for gateEntryReasonPojo change
+  const handleGateEntryReasonChange = (selectedOption) => {
+    setFormData({
+      ...formData,
+      gateEntryReasonPojo: selectedOption ? selectedOption.value : ''
+    });
+  };
+
+  // Input change handler for other form inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -137,7 +169,52 @@ const SecurityForm = ({ userInfo, fleetNumber, token, userLocation}) => {
     <div className='container-fluid remark-container'>
       <h3 className='form-title'>Security Form Details</h3>
       <form onSubmit={handleSubmit} className='remark-form'>
-        {questions.map((question, index) => (
+        <div className='questions'>
+          <p className='question__title'>Gate Entry</p>
+          <div className='question__options'>
+            <label className='question__label'>
+              <input
+                type="radio"
+                name="gateEntryPojo"
+                value="in"
+                onChange={handleGateEntryChange}
+                checked={formData.gateEntryPojo === 'in'}
+                className='question__option'
+              />
+              <span>In</span>
+            </label>
+            <label className='question__label'>
+              <input
+                type="radio"
+                name="gateEntryPojo"
+                value="out"
+                onChange={handleGateEntryChange}
+                checked={formData.gateEntryPojo === 'out'}
+                className='question__option'
+              />
+              <span>Out</span>
+            </label>
+          </div>
+        </div>
+
+        {formData.gateEntryPojo && (
+          <div className='questions'>
+            <p className='question__title'>Gate Entry Reason</p>
+            <Select
+              options={formData.gateEntryPojo === 'in' ? inOptions : outOptions}
+              onChange={handleGateEntryReasonChange}
+              value={
+                formData.gateEntryReasonPojo
+                  ? { value: formData.gateEntryReasonPojo, label: formData.gateEntryReasonPojo }
+                  : null
+              }
+              className='form-select'
+              placeholder="Select reason"
+            />
+          </div>
+        )}
+
+        {questions.slice(1).map((question, index) => (
           <div className='questions' key={index}>
             <p className='question__title'>{question.label}</p>
             <div className='question__options'>

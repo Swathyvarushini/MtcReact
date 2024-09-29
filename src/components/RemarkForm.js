@@ -199,7 +199,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation, currentDate })
                 onChange={(selectedOption) => handleInputChange(selectedOption, question.key)}
                 options={question.options}
                 className='question__dropdown'
-                placeholder="Select"
+                placeholder="Select" 
               />
             </div>
           </div>
