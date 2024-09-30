@@ -13,6 +13,7 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation, currentDate })
       label: 'Platform Damage',
       key: 'platformPojo',
       options: [
+        { value: 'Good Condition', label: 'Good Condition' },
         { value: 'Platform Hole', label: 'Platform Hole' },
         { value: 'Platform C/O', label: 'Platform C/O' },
         { value: 'Platform Structure Damage', label: 'Platform Structure Damage' }
@@ -164,11 +165,11 @@ const RemarkForm = ({ userInfo, fleetNumber, token, userLocation, currentDate })
       });
 
       if (response.data) {
+        navigate("/scanner");
         toast.success('Form successfully submitted', {
           position: "top-center",
           autoClose: 3000,
         });
-        navigate("/scanner");
       } else {
         toast.error('Form submission failed', {
           position: "top-center",
