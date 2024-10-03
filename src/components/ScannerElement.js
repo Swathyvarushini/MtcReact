@@ -25,7 +25,10 @@ export default function ScannerElement() {
                             navigate(`/form?data=${encodeURIComponent(result.data)}&formType=SecurityForm`);
                         } else if (result.data.includes("TimekeeperForm")) {
                             navigate(`/form?data=${encodeURIComponent(result.data)}&formType=TimekeeperForm`);
-                        } else {
+                        } else if (result.data.includes("CheckerForm")) {
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=CheckerForm`);
+                        }
+                         else {
                             setError('Unrecognized QR code');
                         }
                     },

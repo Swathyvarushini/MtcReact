@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import RemarkForm from '../../components/RemarkForm';
 import SecurityForm from '../../components/SecurityForm';
 import TimeKeeperForm from '../../components/TimeKeeperForm';
+import CheckerForm from '../../components/CheckerForm';
 
 export default function Form() {
   const location = useLocation();
@@ -96,6 +97,14 @@ export default function Form() {
         )}
         {formType === 'TimekeeperForm' && (
           <TimeKeeperForm
+            userInfo={userInfo}
+            fleetNumber={fleetNumber}
+            token={localStorage.getItem('token')}
+            userLocation={userLocation}
+          />
+        )}
+        {formType === 'CheckerForm' && (
+          <CheckerForm
             userInfo={userInfo}
             fleetNumber={fleetNumber}
             token={localStorage.getItem('token')}
