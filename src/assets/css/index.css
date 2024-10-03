@@ -265,6 +265,21 @@ button {
 .form-header {
   margin: 25px;
 }
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 1rem ;
+  border: 1px solid var(--border-gray-dark);
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: var(--border-sky);
+}
 
 .form-details {
   line-height: 2;
