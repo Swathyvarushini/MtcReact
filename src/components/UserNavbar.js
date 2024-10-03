@@ -53,6 +53,7 @@ export const UserNavbar = () => {
           <div className={`dropdown-content ${openDropdown === 'userRecords' ? 'show' : ''}`}>
             <NavLink to="/inspection-record" className='dropdown-link' onClick={closeMenu}>Inspection Record</NavLink>
             <NavLink to="/security-record" className='dropdown-link' onClick={closeMenu}>Security Record</NavLink>
+            <NavLink to="/checker-record" className='dropdown-link' onClick={closeMenu}>Checker Record</NavLink>
             <NavLink to="/timekeeper-record" className='dropdown-link' onClick={closeMenu}>Time Keeper Record</NavLink>
           </div>
         </div>

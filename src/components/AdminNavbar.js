@@ -52,6 +52,7 @@ export const AdminNavbar = () => {
                         <NavLink to="/vehicle-details" className="dropdown-link" onClick={closeMenu}>Vehicle Details</NavLink>
                         <NavLink to="/inspection-details" className="dropdown-link" onClick={closeMenu}>Inspection Details</NavLink>
                         <NavLink to="/security-details" className="dropdown-link" onClick={closeMenu}>Security Details</NavLink>
+                        <NavLink to="/checker-details" className="dropdown-link" onClick={closeMenu}>Checker Details</NavLink>
                         <NavLink to="/timekeeper-details" className="dropdown-link" onClick={closeMenu}>TimeKeeper Details</NavLink>
                     </div>
                 </div>

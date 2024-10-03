@@ -21,6 +21,8 @@ import SecurityRecord from "./pages/User/SecurityRecord";
 import TimeKeeperRecord from "./pages/User/TimeKeeperRecord";
 import ScrollToTop from "./components/ScrollToTop";
 import 'react-toastify/dist/ReactToastify.css';
+import CheckerRecord from "./pages/User/CheckerRecord";
+import CheckerDetails from "./pages/Admin/CheckerDetails";
 
 
 const App = () => {
@@ -36,8 +38,8 @@ const App = () => {
 
 const AppRoutes = () => {
   const location = useLocation();
-  const isUserRoute = location.pathname.startsWith('/scanner') || location.pathname.startsWith('/form') || location.pathname.startsWith('/inspection-record') || location.pathname.startsWith('/security-record') || location.pathname.startsWith('/timekeeper-record');
-  const isAdminRoute = location.pathname.startsWith('/home') || location.pathname.startsWith('/user-details') || location.pathname.startsWith('/vehicle-details') || location.pathname.startsWith('/inspection-details') || location.pathname.startsWith('/security-details') || location.pathname.startsWith('/timekeeper-details') || location.pathname.startsWith('/user-register') || location.pathname.startsWith('/vehicle-register');
+  const isUserRoute = location.pathname.startsWith('/scanner') || location.pathname.startsWith('/form') || location.pathname.startsWith('/inspection-record') || location.pathname.startsWith('/security-record') || location.pathname.startsWith('/checker-record') || location.pathname.startsWith('/timekeeper-record');
+  const isAdminRoute = location.pathname.startsWith('/home') || location.pathname.startsWith('/user-details') || location.pathname.startsWith('/vehicle-details') || location.pathname.startsWith('/inspection-details') || location.pathname.startsWith('/security-details') || location.pathname.startsWith('checker-details') || location.pathname.startsWith('/timekeeper-details') || location.pathname.startsWith('/user-register') || location.pathname.startsWith('/vehicle-register');
 
   return (
     <>
@@ -49,6 +51,7 @@ const AppRoutes = () => {
         <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
         <Route path="/inspection-record" element={<ProtectedRoute><InspectionRecord /></ProtectedRoute>} />
         <Route path="/security-record" element={<ProtectedRoute><SecurityRecord /></ProtectedRoute>} />
+        <Route path="/checker-record" element={<ProtectedRoute><CheckerRecord/></ProtectedRoute>} />
         <Route path="/timekeeper-record" element={<ProtectedRoute><TimeKeeperRecord/></ProtectedRoute>} />
         <Route path="/select-role" element={<ProtectedRoute><SelectRole /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
@@ -56,6 +59,7 @@ const AppRoutes = () => {
         <Route path="/vehicle-details" element={<ProtectedRoute><VehicleDetails /></ProtectedRoute>} />
         <Route path="/inspection-details" element={<ProtectedRoute><InspectionDetails /></ProtectedRoute>} />
         <Route path="/security-details" element={<ProtectedRoute><SecurityDetails /></ProtectedRoute>} />
+        <Route path="/checker-details" element={<ProtectedRoute><CheckerDetails/></ProtectedRoute>} />
         <Route path="/timekeeper-details" element={<ProtectedRoute><TimeKeeperDetails /></ProtectedRoute>} />
         <Route path="/user-register" element={<ProtectedRoute><UserRegister /></ProtectedRoute>} />
         <Route path="/vehicle-register" element={<ProtectedRoute><VehicleRegister /></ProtectedRoute>} />
