@@ -27,7 +27,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         ticketLessTravelPojo: '',
         fineCollectionPojo: '',
         stagePojo: '',
-        irNoPojo: '', 
+        irNoPojo: '',
     });
 
     const [remarks, setRemarks] = useState('');
@@ -84,7 +84,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
 
     const validateForm = (updatedFormData, updatedRemarks = remarks) => {
         const requiredFields = { ...updatedFormData };
-        delete requiredFields.irNoPojo; 
+        delete requiredFields.irNoPojo;
         const allRequiredFieldsFilled = Object.keys(requiredFields).every(key => requiredFields[key]);
         const remarksValid = updatedRemarks.length > 5;
         const irNoValid = !updatedFormData.irNoPojo || updatedFormData.irNoPojo.length >= 5;
@@ -118,18 +118,36 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 navigate("/scanner");
                 toast.success('Form successfully submitted', {
                     position: "top-center",
-                    autoClose: 3000
+                    autoClose: 3000,
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
             } else {
                 toast.error('Form submission failed', {
                     position: "top-center",
-                    autoClose: 3000
+                    autoClose: 3000,
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
             }
         } catch (error) {
             toast.error('An error occurred. Please try again later', {
                 position: "top-center",
-                autoClose: 3000
+                autoClose: 3000,
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
             });
         } finally {
             setLoading(false);
@@ -142,7 +160,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
             <form onSubmit={handleSubmit} className='remark-form'>
 
                 <div className='questions'>
-                    <label>Route and Service</label>
+                    <label className="form-label">Route and Service</label>
                     <input
                         type="text"
                         name="routeAndServicePojo"
@@ -155,7 +173,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Direction</label>
+                    <label className="form-label">Direction</label>
                     <Select
                         options={directionOptions}
                         onChange={(selectedOption) => handleSelectChange(selectedOption, 'directionPojo')}
@@ -167,7 +185,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Region</label>
+                    <label className="form-label">Region</label>
                     <Select
                         options={regionOptions}
                         onChange={(selectedOption) => handleSelectChange(selectedOption, 'regionPojo')}
@@ -179,7 +197,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Squad No</label>
+                    <label className="form-label">Squad No</label>
                     <input
                         type="text"
                         name="squadNoPojo"
@@ -192,7 +210,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Conductor No (6 characters max)</label>
+                    <label className="form-label">Conductor No</label>
                     <input
                         type="text"
                         name="conductorNoPojo"
@@ -206,9 +224,9 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Passenger Count (3 digits max)</label>
+                    <label className="form-label">Passenger Count</label>
                     <input
-                        type="number"
+                        type="text"
                         name="passengerCountPojo"
                         value={formData.passengerCountPojo}
                         onChange={handleInputChange}
@@ -220,9 +238,9 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Ticketless Travel (3 digits max)</label>
+                    <label className="form-label">Ticketless Count</label>
                     <input
-                        type="number"
+                        type="text"
                         name="ticketLessTravelPojo"
                         value={formData.ticketLessTravelPojo}
                         onChange={handleInputChange}
@@ -234,9 +252,9 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Fine Collection (4 digits max)</label>
+                    <label className="form-label">Fine Collection Amount</label>
                     <input
-                        type="number"
+                        type="text"
                         name="fineCollectionPojo"
                         value={formData.fineCollectionPojo}
                         onChange={handleInputChange}
@@ -248,7 +266,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>Stage</label>
+                    <label className="form-label">Stage</label>
                     <input
                         type="text"
                         name="stagePojo"
@@ -261,7 +279,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                 </div>
 
                 <div className='questions'>
-                    <label>IR No (Optional, min 5 characters if filled)</label>
+                    <label className="form-label">IR No</label>
                     <input
                         type="text"
                         name="irNoPojo"
@@ -273,6 +291,18 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
                     {formData.irNoPojo && formData.irNoPojo.length < 5 && (
                         <small className='error-text'>IR number must be at least 5 characters if filled.</small>
                     )}
+                </div>
+                <div>
+                    <label htmlFor='remarks' className='form-label'>Remarks</label>
+                    <textarea
+                        name="remarks"
+                        id="remarks"
+                        className='form-textarea'
+                        placeholder='Enter your comments (minimum 5 characters)'
+                        value={remarks}
+                        onChange={handleRemarksChange}
+                    ></textarea>
+                    <small className='info-text'>*required to be filled</small>
                 </div>
 
                 <div className='form-btn__container'>
