@@ -98,7 +98,7 @@ const CheckerForm = ({ userInfo, fleetNumber, token, userLocation }) => {
         const dateTime = getCurrentDateTime();
 
         try {
-            const response = await axios.post(`${CONFIG.URL}/checker/saveRecord`, {
+            const response = await axios.post(`${CONFIG.URL}/inspection/checker/saveRecord`, {
                 ...formData,
                 staffNumberBasePojo: userInfo.staffNumber,
                 staffNameBasePojo: userInfo.staffName,
