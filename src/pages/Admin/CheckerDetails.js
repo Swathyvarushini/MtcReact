@@ -15,7 +15,7 @@ const CheckerDetails = () => {
             setLoading(true);
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`${CONFIG.URL}/checker/viewRecord`, {
+                const response = await axios.get(`${CONFIG.URL}/inspection/checker/viewRecord`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',

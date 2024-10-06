@@ -52,7 +52,7 @@ const AppRoutes = () => {
         <Route path="/inspection-record" element={<ProtectedRoute><InspectionRecord /></ProtectedRoute>} />
         <Route path="/security-record" element={<ProtectedRoute><SecurityRecord /></ProtectedRoute>} />
         <Route path="/checker-record" element={<ProtectedRoute><CheckerRecord/></ProtectedRoute>} />
-        <Route path="/timekeeper-record" element={<ProtectedRoute><TimeKeeperRecord/></ProtectedRoute>} />
+        {/* <Route path="/timekeeper-record" element={<ProtectedRoute><TimeKeeperRecord/></ProtectedRoute>} /> */}
         <Route path="/select-role" element={<ProtectedRoute><SelectRole /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/user-details" element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
@@ -60,7 +60,7 @@ const AppRoutes = () => {
         <Route path="/inspection-details" element={<ProtectedRoute><InspectionDetails /></ProtectedRoute>} />
         <Route path="/security-details" element={<ProtectedRoute><SecurityDetails /></ProtectedRoute>} />
         <Route path="/checker-details" element={<ProtectedRoute><CheckerDetails/></ProtectedRoute>} />
-        <Route path="/timekeeper-details" element={<ProtectedRoute><TimeKeeperDetails /></ProtectedRoute>} />
+        {/* <Route path="/timekeeper-details" element={<ProtectedRoute><TimeKeeperDetails /></ProtectedRoute>} /> */}
         <Route path="/user-register" element={<ProtectedRoute><UserRegister /></ProtectedRoute>} />
         <Route path="/vehicle-register" element={<ProtectedRoute><VehicleRegister /></ProtectedRoute>} />
       </Routes>
