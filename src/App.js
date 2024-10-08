@@ -29,7 +29,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-      <ScrollToTop/>
+        <ScrollToTop/>
         <AppRoutes />
       </BrowserRouter>
     </Provider>
@@ -43,9 +43,9 @@ const AppRoutes = () => {
 
   return (
     <>
-      {isUserRoute && <UserNavbar />}
-      {isAdminRoute && <AdminNavbar />}
       <Routes>
+        {isUserRoute && <UserNavbar />}
+        {isAdminRoute && <AdminNavbar />}
         <Route path="/" element={<ProtectedRoute><Login/></ProtectedRoute>} />
         <Route path="/scanner" element={<ProtectedRoute><Scanner/></ProtectedRoute>} />
         <Route path="/form" element={<ProtectedRoute><Form/></ProtectedRoute>} />
