@@ -21,8 +21,8 @@ export default function ScannerElement() {
                         qrScanner.stop();
                         if (result.data.includes("InspectionForm")) {
                             navigate(`/form?data=${encodeURIComponent(result.data)}&formType=InspectionForm`);
-                        // } else if (result.data.includes("SecurityForm")) {
-                        //     navigate(`/form?data=${encodeURIComponent(result.data)}&formType=SecurityForm`);
+                        } else if (result.data.includes("SecurityForm")) {
+                            navigate(`/form?data=${encodeURIComponent(result.data)}&formType=SecurityForm`);
                         // } else if (result.data.includes("TimekeeperForm")) {
                         //     navigate(`/form?data=${encodeURIComponent(result.data)}&formType=TimekeeperForm`);
                         } else if (result.data.includes("CheckerForm")) {
