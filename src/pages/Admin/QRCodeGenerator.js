@@ -13,7 +13,6 @@ const QRCodeGenerator = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token'); 
-
       if (!token) {
         throw new Error('Token is missing. Please log in again.');
       }
