@@ -56,8 +56,9 @@ export const UserNavbar = () => {
             <NavLink to="/checker-record" className='dropdown-link' onClick={closeMenu}>Checker Record</NavLink>
             {/* <NavLink to="/timekeeper-record" className='dropdown-link' onClick={closeMenu}>Time Keeper Record</NavLink> */}
           </div>
+          
         </div>
-
+        
         <NavLink to="/" className="logout-btn" onClick={closeMenu}>Logout</NavLink>
       </div>
     </nav>

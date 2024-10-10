@@ -27,10 +27,10 @@ import CheckerDetails from "./pages/Admin/CheckerDetails";
 const App = () => {
   return (
     <Provider store={store}>
-      <HashRouter basename={process.env.REACT_APP_BASE_URL}>
+      <BrowserRouter>
         <ScrollToTop />
         <AppRoutes />
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   );
 };
