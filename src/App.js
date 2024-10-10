@@ -60,7 +60,7 @@ const AppRoutes = () => {
       {isUserRoute && <UserNavbar />}
       {isAdminRoute && <AdminNavbar />}
       <Routes>
-        <Route path="/" exact element={<ProtectedRoute><Login /></ProtectedRoute>} />
+        <Route path="/" exact element={<Login />} />
         <Route path="/scanner" element={<ProtectedRoute><Scanner /></ProtectedRoute>} />
         <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>} />
         <Route path="/inspection-record" element={<ProtectedRoute><InspectionRecord /></ProtectedRoute>} />
