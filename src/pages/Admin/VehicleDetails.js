@@ -31,7 +31,9 @@ const VehicleDetails = () => {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
+                
             });
+            console.log("Token is",localStorage.getItem('token'));
             setVehicleDetails(response.data.reverse());
         } catch (error) {
             setError(error.response?.data?.message || 'An error occurred');
@@ -127,7 +129,7 @@ const VehicleDetails = () => {
                 <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
             </div>
             <h3 className='user-heading'>Vehicle Information</h3>
-            <QRCodeGenerator />         
+            {/* <QRCodeGenerator />          */}
             {error && <div className='error'>{error}</div>}
             {isEditing && currentVehicle ? (
                 <div className='edit-form'>
